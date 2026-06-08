@@ -44,7 +44,7 @@ export default function ContactSection() {
         variants={cardReveal}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
-        className="relative w-full max-w-6xl p-10 md:p-16 overflow-hidden rounded-[2.5rem] shadow-2xl"
+        className="relative w-full max-w-5xl p-10 md:p-16 overflow-hidden rounded-[2.5rem] shadow-2xl border-4 border-(--accent)"
         style={{ background: "linear-gradient(180deg, #161E54 0%, #00083F 100%)" }}
       >
         {/* ── Gradient blobs ────────────────────────────────────────── */}
@@ -87,14 +87,6 @@ export default function ContactSection() {
           }}
         />
 
-        {/* ── SVG overlay ── */}
-        <div className="absolute inset-0 z-0 pointer-events-none">
-          <img
-            src="/assets/contact-overlay.svg"
-            alt="Background Overlay"
-            className="object-cover w-full h-full"
-          />
-        </div>
 
         {/* ── Content grid ── */}
         <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center w-full">
@@ -108,7 +100,7 @@ export default function ContactSection() {
           >
             <motion.h2
               variants={fadeUp}
-              className="font-(family-name:--font-super-warming) text-5xl md:text-7xl font-black leading-tight mb-6 text-white tracking-tight"
+              className="font-(family-name:--font-super-warming) text-5xl md:text-7xl mb-6 text-white tracking-wide"
             >
               Let&apos;s work <br />
               <span
