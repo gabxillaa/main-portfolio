@@ -121,10 +121,13 @@ export default function AboutMe() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-(family-name:--font-urbanist) text-base sm:text-lg leading-relaxed"
+            className="font-(family-name:--font-urbanist) text-base leading-relaxed text-justify"
             style={{ color: "color-mix(in srgb, var(--text) 60%, transparent)" }}
           >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            I'm a UI/UX designer and front-end developer who genuinely cares about how things look
+            and how they feel to use. I'm still early in my journey; and honestly, that excites me.
+            Every project is a chance to learn something new, try something I haven't tried before,
+            and get a little better than yesterday.
           </motion.p>
 
           <motion.div

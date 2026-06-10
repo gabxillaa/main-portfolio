@@ -234,33 +234,33 @@ export default function Hero() {
       <div className="absolute inset-0 z-20 pointer-events-none flex flex-col justify-center items-center text-center select-none">
         <div className="flex flex-col items-start translate-y-0 sm:-translate-y-4">
 
-          {/* Eyebrow label — fades up first */}
-          <motion.span
-            variants={fadeUp(0.55, 0.8)}
-            initial="hidden"
-            animate={entered ? "visible" : "hidden"}
-            className="font-(family-name:--font-urbanist) text-white text-xs sm:text-sm md:text-base tracking-widest font-medium opacity-80 ml-1 md:ml-2 mb-1"
-          >
-            Hey! This is my
-          </motion.span>
+          {/* Container to enforce alignment against the 12rem headline */}
+          <div className="flex flex-col items-start w-full max-w-[80vw]">
 
-          {/* Main headline — rises up with slight overshoot */}
-          <motion.h1
-            className="glowing-crawl-text font-(family-name:--font-super-warming) text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] leading-none tracking-wide drop-shadow-[0_0_35px_rgba(255,255,255,0.15)]"
-            initial={{ opacity: 0, y: 60, skewY: 2 }}
-            animate={entered ? {
-              opacity: 1,
-              y: 0,
-              skewY: 0,
-              transition: {
-                duration: 1.1,
-                delay: 0.75,
-                ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
-              },
-            } : { opacity: 0, y: 60, skewY: 2 }}
-          >
-            PORTFOLIO
-          </motion.h1>
+            {/* Eyebrow: Increased weight for visibility against the 12rem H1 */}
+            <motion.span
+              variants={fadeUp(0.55, 0.8)}
+              initial="hidden"
+              animate={entered ? "visible" : "hidden"}
+              className="font-(family-name:--font-urbanist) text-white/70 text-base tracking-[0.2em] font-semibold uppercase mb-4"
+            >
+              Where Ideas Come To
+            </motion.span>
+
+            {/* Main Headline: Maintaining your scale */}
+            <motion.h1
+              className="glowing-crawl-text font-(family-name:--font-super-warming) text-5xl sm:text-7xl md:text-8xl lg:text-[12rem] leading-[0.9] tracking-[-0.02em] drop-shadow-[0_0_35px_rgba(255,255,255,0.2)]"
+              initial={{ opacity: 0, y: 60, skewY: 2 }}
+              animate={entered ? {
+                opacity: 1,
+                y: 0,
+                skewY: 0,
+                transition: { duration: 1.1, delay: 0.75, ease: [0.16, 1, 0.3, 1] },
+              } : { opacity: 0, y: 60, skewY: 2 }}
+            >
+              GLOW UP
+            </motion.h1>
+          </div>
         </div>
       </div>
     </section>

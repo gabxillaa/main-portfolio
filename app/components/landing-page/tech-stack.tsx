@@ -8,25 +8,18 @@ import {
 import { motion } from "framer-motion";
 
 const TECHS = [
-  { name: "TypeScript", icon: SiTypescript, color: "#3178C6", tag: "Language" },
-  { name: "React",      icon: SiReact,      color: "#61DAFB", tag: "Web"      },
-  { name: "Next.js",    icon: SiNextdotjs,  color: "#111111", tag: "Web"      },
-  { name: "Flutter",    icon: SiFlutter,    color: "#54C5F8", tag: "Mobile"   },
-  { name: "Tailwind",   icon: SiTailwindcss,color: "#38BDF8", tag: "Web"      },
-  { name: "Python",     icon: SiPython,     color: "#3572A5", tag: "Language" },
-  { name: "Firebase",   icon: SiFirebase,   color: "#FFA611", tag: "Backend"  },
-  { name: "Figma",      icon: SiFigma,      color: "#F24E1E", tag: "Design"   },
-  { name: "Git",        icon: SiGit,        color: "#F05032", tag: "Tool"     },
+  { name: "TypeScript", icon: SiTypescript, color: "#3178C6", bg: "#deeaf7", tag: "Language" },
+  { name: "React",      icon: SiReact,      color: "#61DAFB", bg: "#e0f7fd", tag: "Web"      },
+  { name: "Next.js",    icon: SiNextdotjs,  color: "#111111", bg: "#e4e4e6", tag: "Web"      },
+  { name: "Flutter",    icon: SiFlutter,    color: "#54C5F8", bg: "#ddf2fb", tag: "Mobile"   },
+  { name: "Tailwind",   icon: SiTailwindcss,color: "#38BDF8", bg: "#ddf1fc", tag: "Web"      },
+  { name: "Python",     icon: SiPython,     color: "#3572A5", bg: "#e4ecf5", tag: "Language" },
+  { name: "Firebase",   icon: SiFirebase,   color: "#FFA611", bg: "#fef2dc", tag: "Backend"  },
+  { name: "Figma",      icon: SiFigma,      color: "#F24E1E", bg: "#fde8e2", tag: "Design"   },
+  { name: "Git",        icon: SiGit,        color: "#F05032", bg: "#fde8e4", tag: "Tool"     },
 ];
 
-const TAG_STYLES: Record<string, React.CSSProperties> = {
-  Language: { background: "#fce8e8", color: "#791F1F" },
-  Web:      { background: "#e8f0fe", color: "#185FA5" },
-  Mobile:   { background: "#e8f8ee", color: "#27500A" },
-  Backend:  { background: "#fef3e2", color: "#633806" },
-  Design:   { background: "#f3eeff", color: "#3C3489" },
-  Tool:     { background: "#f1efe8", color: "#444441" },
-};
+
 
 const PARTICLES = [
   { id: 1,  x: 2,  y: 22, size: 16, dur: 5.2, delay: 0,   color: "var(--accent)",  symbol: "✦" },
@@ -131,10 +124,10 @@ export default function TechStack() {
           {TECHS.map((tech, i) => (
             <motion.div
               key={tech.name}
-              className="flex flex-col items-center gap-2 rounded-2xl py-5 px-3 cursor-default"
+              className="flex flex-col items-center gap-2 rounded-2xl py-8 px-3 cursor-default"
               style={{
-                background: "var(--background, #F7F6FF)",
-                border: "1px solid color-mix(in srgb, var(--primary) 8%, transparent)",
+                background: tech.bg,
+                border: `1px solid ${tech.color}18`,
               }}
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -149,12 +142,8 @@ export default function TechStack() {
               >
                 {tech.name}
               </span>
-              <span
-                className="font-(family-name:--font-urbanist) text-[9px] font-bold tracking-wider uppercase px-2.5 py-1 rounded-full"
-                style={TAG_STYLES[tech.tag]}
-              >
-                {tech.tag}
-              </span>
+
+
             </motion.div>
           ))}
         </div>

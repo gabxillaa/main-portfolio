@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { Playfair_Display, Inter } from 'next/font/google';
+import { Toaster } from "sonner";
+
+const editorial = Playfair_Display({ subsets: ['latin'], variable: '--font-editorial' });
+const sans = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
 const urbanist = localFont({
   src: "./fonts/Urbanist-VariableFont_wght.ttf",
@@ -34,7 +39,11 @@ export default function RootLayout({
           href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
         />
       </head>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        {children}
+
+        <Toaster position="top-right" richColors closeButton />
+      </body>
     </html>
   );
 }
