@@ -3,14 +3,17 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, useInView, type Variants } from "framer-motion";
 import { useRouter } from "next/navigation";
+import { projects } from "@/lib/projects";
 
 // ── Data ──────────────────────────────────────────────────────────────────────
-const PROJECTS = [
-  { id: 1, title: "Moldify",       desc: "Mold Investigation System",  gradient: "linear-gradient(160deg,#71B5C2 0%,#3a8fa0 100%)", slug: "moldify",       image: "/assets/moldify.svg" },
-  { id: 2, title: "Deck",          desc: "Flashcard Management System", gradient: "linear-gradient(160deg,#4CAF50 0%,#1e7a32 100%)", slug: "deck",          image: "/assets/deck.svg" },
-  { id: 3, title: "Archivary",     desc: "Library Management System",  gradient: "linear-gradient(160deg,#FF844B 0%,#cc4400 100%)", slug: "archivary",     image: "/assets/archivary.svg" },
-  { id: 4, title: "Through the Woods", desc: "Mobile Platformer Game", gradient: "linear-gradient(160deg,#2a3570 0%,#0d1230 100%)", slug: "through-the-woods", image: "/assets/through-the-woods.svg" },
-];
+const PROJECTS = projects.map((p) => ({
+  id:       p.slug,         // was a number, now slug string — update dataset checks below
+  title:    p.title,
+  desc:     p.desc,
+  gradient: p.gradient,
+  slug:     p.slug,
+  image:    p.thumbnail,
+}));
 
 const PARTICLES = [
   { id: 1,  x: 2,  y: 22, size: 12, dur: 5.2, delay: 0,   color: "var(--accent)",  symbol: "✦" },
@@ -70,8 +73,12 @@ export default function ArcCarousel() {
   const rafRef       = useRef<number>(0);
   const offsetRef    = useRef(0);
   const pausedRef    = useRef(false);
-  const dragRef      = useRef({ active: false, startX: 0, startOffset: 0 });
-
+  const dragRef = useRef<{ active: boolean; startX: number; startOffset: number; moved: boolean }>({
+    active: false,
+    startX: 0,
+    startOffset: 0,
+    moved: false,
+  });
   const hoveredIdxRef    = useRef<number | null>(null);
   const hoverProgressRef = useRef<Map<number, number>>(new Map());
 
@@ -155,8 +162,8 @@ export default function ArcCarousel() {
           titleHoverEl.textContent = proj.title;
         }
 
-        if (card.dataset.projId !== String(proj.id)) {
-          card.dataset.projId = String(proj.id);
+        if (card.dataset.projId !== proj.id) {
+          card.dataset.projId = proj.id;
           card.dataset.slug   = proj.slug;
 
           const bg = card.querySelector<HTMLElement>(".arc-bg");
@@ -179,41 +186,53 @@ export default function ArcCarousel() {
     return () => cancelAnimationFrame(rafRef.current);
   }, [dims]);
 
-  // ── Pointer handlers ──────────────────────────────────────────────────────
-  function onPointerDown(e: React.PointerEvent) {
-    pausedRef.current = true;
-    dragRef.current   = { active: true, startX: e.clientX, startOffset: offsetRef.current };
-    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
-  }
-
-  function onPointerMove(e: React.PointerEvent) {
-    if (!dragRef.current.active) return;
-    const trackLen    = PROJECTS.length * (dims.cardW + dims.gap);
-    const delta       = dragRef.current.startX - e.clientX;
-    offsetRef.current = ((dragRef.current.startOffset + delta) % trackLen + trackLen) % trackLen;
-  }
-
-  function onPointerUp() {
-    dragRef.current.active = false;
-    setTimeout(() => { pausedRef.current = false; }, 1200);
-  }
-
-  function onCardClick(e: React.MouseEvent<HTMLElement>) {
-    const slug = (e.currentTarget as HTMLElement).dataset.slug;
-    if (slug && Math.abs(offsetRef.current - dragRef.current.startOffset) < 8) {
-      router.push(`/projects/${slug}`);
+  // ── Pointer handlers — all card-level now ─────────────────────────────────
+    function onCardPointerDown(e: React.PointerEvent<HTMLDivElement>) {
+      pausedRef.current = true;
+      dragRef.current = {
+        active:      true,
+        startX:      e.clientX,
+        startOffset: offsetRef.current,
+        moved:       false,
+      };
+      (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+      e.stopPropagation();
     }
-  }
 
-  function onCardEnter(e: React.MouseEvent<HTMLElement>) {
-    pausedRef.current = true;
-    hoveredIdxRef.current = Number((e.currentTarget as HTMLElement).dataset.poolIdx);
-  }
+    function onCardPointerMove(e: React.PointerEvent<HTMLDivElement>) {
+      if (!dragRef.current.active) return;
+      const delta = Math.abs(e.clientX - dragRef.current.startX);
+      if (delta > 6) dragRef.current.moved = true;
+      const trackLen    = PROJECTS.length * (dims.cardW + dims.gap);
+      const offsetDelta = dragRef.current.startX - e.clientX;
+      offsetRef.current = ((dragRef.current.startOffset + offsetDelta) % trackLen + trackLen) % trackLen;
+      e.stopPropagation();
+    }
 
-  function onCardLeave() {
-    pausedRef.current = false;
-    hoveredIdxRef.current = null;
-  }
+    function onCardPointerUp(e: React.PointerEvent<HTMLDivElement>) {
+      dragRef.current.active = false;
+      setTimeout(() => { pausedRef.current = false; }, 1200);
+      e.stopPropagation();
+    }
+
+    function onCardClick(e: React.MouseEvent<HTMLDivElement>) {
+      if (dragRef.current.moved) {
+        dragRef.current.moved = false;
+        return;
+      }
+      const slug = (e.currentTarget as HTMLElement).dataset.slug;
+      if (slug) router.push(`/view-project/${slug}`);
+    }
+
+    function onCardEnter(e: React.MouseEvent<HTMLDivElement>) {
+      pausedRef.current = true;
+      hoveredIdxRef.current = Number((e.currentTarget as HTMLElement).dataset.poolIdx);
+    }
+
+    function onCardLeave() {
+      pausedRef.current = false;
+      hoveredIdxRef.current = null;
+    }
 
   const poolSize = PROJECTS.length * 3;
 
@@ -341,17 +360,18 @@ export default function ArcCarousel() {
 
       {/* ── Arc Carousel — rises up last ── */}
       <motion.div
-        variants={carouselReveal}
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
-        transition={{ delay: 0.5 }}
-        className="relative w-full z-10 shrink-0 select-none"
-        style={{ height: dims.wrapH, marginTop: 48, cursor: "grab", overflow: "visible" }}
-        onMouseLeave={() => { pausedRef.current = false; dragRef.current.active = false; hoveredIdxRef.current = null; }}
-        onPointerDown={onPointerDown}
-        onPointerMove={onPointerMove}
-        onPointerUp={onPointerUp}
-      >
+          variants={carouselReveal}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          transition={{ delay: 0.5 }}
+          className="relative w-full z-10 shrink-0 select-none"
+          style={{ height: dims.wrapH, marginTop: 48, cursor: "grab", overflow: "visible" }}
+          onMouseLeave={() => {
+            pausedRef.current   = false;
+            dragRef.current.active = false;
+            hoveredIdxRef.current  = null;
+          }}
+        >
         {/* ── Edge fades ── */}
         <div className="pointer-events-none absolute inset-0 z-20" style={{ overflow: "hidden" }}>
           <div className="absolute left-0 top-0 bottom-0" style={{ width: "clamp(60px,12vw,140px)", background: "linear-gradient(to right, var(--background) 0%, transparent 100%)" }} />
@@ -371,19 +391,22 @@ export default function ArcCarousel() {
                 onClick={onCardClick}
                 onMouseEnter={onCardEnter}
                 onMouseLeave={onCardLeave}
+                onPointerDown={onCardPointerDown}
+                onPointerMove={onCardPointerMove}
+                onPointerUp={onCardPointerUp}
                 style={{
-                  position: "absolute",
-                  borderRadius: 16,
-                  willChange: "transform, opacity, box-shadow, bottom",
+                  position:        "absolute",
+                  borderRadius:    16,
+                  willChange:      "transform, opacity, box-shadow, bottom",
                   transformOrigin: "bottom center",
-                  cursor: "pointer",
-                  pointerEvents: "auto",
-                  width: dims.cardW,
-                  height: dims.cardH,
+                  cursor:          "pointer",
+                  pointerEvents:   "auto",
+                  width:           dims.cardW,
+                  height:          dims.cardH,
                 }}
               >
                 {/* Inner clip wrapper */}
-                <div style={{ position: "absolute", inset: 0, borderRadius: 16, overflow: "hidden" }}>
+                <div style={{ position: "absolute", inset: 0, borderRadius: 16, overflow: "hidden", pointerEvents: "none" }}>
                   {/* Gradient bg + image */}
                   <div className="arc-bg absolute inset-0" style={{ background: proj.gradient }}>
                     <img

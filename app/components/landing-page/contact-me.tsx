@@ -196,7 +196,7 @@ export default function ContactSection() {
                 whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
                 type="submit"
                 disabled={isSubmitting || loading}
-                className="w-full py-2 text-white rounded-full font-bold shadow-md font-(family-name:--font-super-warming) text-lg tracking-wider mt-2 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed transition-opacity"
+                className="w-full py-2 text-white rounded-full shadow-md font-(family-name:--font-super-warming) text-lg tracking-wider mt-2 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed transition-opacity"
                 style={{ background: "linear-gradient(90deg, #FF9363 0%, #F54C00 100%)" }}
               >
                 {loading ? "Sending..." : "Submit Message"}
