@@ -7,7 +7,6 @@ export const archivary: ProjectData = {
   desc:      "Archival Management System",
   gradient:  "linear-gradient(160deg,#71B5C2 0%,#3a8fa0 100%)",
   thumbnail: "/assets/archivary.svg",
-  liveUrl:   "https://archivary.vercel.app",
 
   context:  "Your real context text...",
   problem:  "Your real problem text...",

@@ -45,8 +45,11 @@ export default function ProjectResults({ results, resultDiscussion }: ProjectRes
                       whileInView="visible"
                       viewport={{ once: true }}
                       transition={{ delay: i * 0.08 }}
-                      className="flex flex-col items-center text-center gap-1 px-6 py-2"
-                      style={{ borderLeft: i !== 0 ? "1px solid rgba(255,255,255,0.15)" : "none" }}
+                      className={[
+                        "flex flex-col items-center text-center gap-1 px-6 py-2",
+                        "md:border-l md:border-[rgba(255,255,255,0.15)]",
+                        i % 4 === 0 ? "md:border-l-0" : ""
+                        ].join(" ")}
                     >
                       <span
                         className="font-(family-name:--font-super-warming) text-white"
@@ -73,7 +76,7 @@ export default function ProjectResults({ results, resultDiscussion }: ProjectRes
       {resultDiscussion && (
         <div className="max-w-screen-lg mx-auto px-8 md:px-16 py-12">
           <Reveal>
-            <div className="grid grid-cols-[220px_1fr] gap-12 items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-[220px_1fr] gap-5 lg:gap-12 items-start">
               <div className="shrink-0">
                 <SectionLabel>Results</SectionLabel>
                 <h2 className="font-(family-name:--font-super-warming) text-xl md:text-2xl leading-snug whitespace-nowrap" style={{ color: "var(--primary)" }}>

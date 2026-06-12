@@ -23,7 +23,7 @@ export default function ProjectFooterSections({ reflection, nextProject }: Proje
       {/* Reflection */}
       <div className="max-w-screen-lg mx-auto px-8 md:px-16 py-14">
         <Reveal>
-          <div className="grid grid-cols-[220px_1fr] gap-12 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-[220px_1fr] gap-5 lg:gap-12 items-start">
             <div className="shrink-0">
               <SectionLabel>Reflection</SectionLabel>
               <h2 className="font-(family-name:--font-super-warming) text-xl md:text-2xl leading-snug" style={{ color: "var(--primary)" }}>
@@ -41,13 +41,13 @@ export default function ProjectFooterSections({ reflection, nextProject }: Proje
       <Reveal>
         <div className="max-w-screen-lg mx-auto px-8 md:px-16 mb-14">
           <div
-            className="relative overflow-hidden rounded-3xl px-10 md:px-16 py-14 flex flex-col md:flex-row items-center justify-between gap-8"
+            className="relative overflow-hidden rounded-3xl px-10 md:px-16 py-14 flex flex-col md:flex-row items-center justify-center lg:justify-between gap-8"
             style={{ background: "radial-gradient(ellipse at 60% 50%, #161e54 0%, #131b52 45%, #10184f 100%)", border: "3px solid var(--accent)" }}
           >
             <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 30% 50%, rgba(40,153,218,0.2) 0%, transparent 65%)", filter: "blur(40px)" }} />
             <div className="absolute top-0 right-0 w-64 h-40 pointer-events-none" style={{ background: "radial-gradient(ellipse at 100% 0%, rgba(255,147,99,0.15) 0%, transparent 70%)", filter: "blur(32px)" }} />
 
-            <div className="relative z-10">
+            <div className="relative z-10 flex flex-col items-center md:items-start text-center md:text-left max-w-lg">
               <p className="font-(family-name:--font-super-warming) text-xs tracking-[0.22em] uppercase mb-2" style={{ color: "var(--accent)" }}>
                 Let's Work Together
               </p>

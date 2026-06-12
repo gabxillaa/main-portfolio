@@ -7,7 +7,7 @@ import { projects } from "@/lib/projects";
 
 // ── Data ──────────────────────────────────────────────────────────────────────
 const PROJECTS = projects.map((p) => ({
-  id:       p.slug,         // was a number, now slug string — update dataset checks below
+  id:       p.slug,
   title:    p.title,
   desc:     p.desc,
   gradient: p.gradient,

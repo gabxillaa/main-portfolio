@@ -21,7 +21,7 @@ export default function ProjectSections({ project }: ProjectSectionsProps) {
       {SECTIONS.map(({ label, heading, key }, i) => (
         <React.Fragment key={label}>
           <Reveal>
-            <div className="grid grid-cols-[220px_1fr] gap-12 items-start">
+           <div className="grid grid-cols-1 lg:grid-cols-[220px_1fr] gap-5 lg:gap-12 items-start">
               <div className="shrink-0">
                 <SectionLabel>{label}</SectionLabel>
                 <h2
