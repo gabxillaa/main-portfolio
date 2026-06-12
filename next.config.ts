@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  experimental: {
+    scrollRestoration: false, // disable App Router scroll restoration
+  },
 };
 
 export default nextConfig;

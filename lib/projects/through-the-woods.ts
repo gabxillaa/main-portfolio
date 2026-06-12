@@ -15,32 +15,32 @@ export const throughTheWoods: ProjectData = {
 
   process: [
     {
-      iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg",
+      iconUrl: "https://api.iconify.design/lucide:search.svg",
       title:  "Requirements Analysis",
-      detail: "Your real process detail...",
+      detail: "The team started by identifying who would use the system: clients, mycologists, and BPI administrators. They conducted interviews, built empathy maps, and ran surveys to understand real pain points and workflows. Benchmarking against existing apps like Picture This and Mold Finder AI also helped shape what features were needed.",
     },
      {
-      iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg",
+      iconUrl: "https://api.iconify.design/mdi:palette.svg",
       title:  "Design Phase",
-      detail: "Your real process detail...",
+      detail: "With requirements in hand, the team translated everything into visual and structural blueprints. They created data flow diagrams, entity-relationship diagrams, use case diagrams, and a system architecture layout. High-fidelity prototypes were built in Figma, along with a branding sheet and color palette to keep the look consistent and professional.",
     },
      {
-      iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg",
+      iconUrl: "https://api.iconify.design/lucide:code.svg",
       title:  "Develop Phase",
       detail: "Your real process detail...",
     },
      {
-      iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg",
+      iconUrl: "https://api.iconify.design/mdi:bug-check.svg",
       title:  "Testing Phase",
       detail: "Your real process detail...",
     },
      {
-      iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg",
+      iconUrl: "https://api.iconify.design/mdi:rocket-launch.svg",
       title:  "Deployment Phase",
       detail: "Your real process detail...",
     },
      {
-      iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg",
+      iconUrl: "https://api.iconify.design/mdi:clipboard-check.svg",
       title:  "Review Phase",
       detail: "Your real process detail...",
     },

@@ -1,12 +1,13 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { motion, useInView, AnimatePresence, type Variants } from "framer-motion";
 import { useRouter } from "next/navigation";
 import Footer from "@/app/components/footer";
 import { GalleryImage, ProjectData } from "@/lib/projects/types";
-
-
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+import ScrollReset from "./scroll-reset";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // ANIMATION VARIANTS
@@ -29,7 +30,7 @@ const stagger: Variants = {
 // ─────────────────────────────────────────────────────────────────────────────
 function Reveal({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const ref    = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-6% 0px" });
+  const inView = useInView(ref, { once: false, margin: "-6% 0px" });
   return (
     <motion.div ref={ref} variants={fadeUp} initial="hidden" animate={inView ? "visible" : "hidden"} transition={{ delay }} className={className}>
       {children}
@@ -196,13 +197,15 @@ export default function ProjectPage({ project, nextProject }: {
   project: ProjectData;
   nextProject: ProjectData | null;
 }) {
-  const router     = useRouter();        // ← add this
+  const router     = useRouter();
   const heroRef    = useRef<HTMLDivElement>(null);   // ← add this
   const heroInView = useInView(heroRef, { once: true }); // ← add this
+  const pathname = usePathname();
+  const [renderKey, setRenderKey] = useState(pathname);
 
   return (
-    <div className="min-h-screen w-full overflow-x-hidden" style={{ background: "var(--background)" }}>
-
+    <div key={renderKey} className="min-h-screen w-full overflow-x-hidden" style={{ background: "var(--background)" }}>
+       <ScrollReset />
       {/* ════════════════════════════════════════════════════
           HERO / HEADER
       ════════════════════════════════════════════════════ */}
@@ -253,7 +256,7 @@ export default function ProjectPage({ project, nextProject }: {
           animate={heroInView ? "visible" : "hidden"}
           className="relative z-10 px-8 md:px-16 pt-20 pb-4 max-w-screen-lg mx-auto"
         >
-          <motion.h1 variants={fadeUp} className="font-(family-name:--font-super-warming) uppercase leading-tight" style={{ fontSize: "clamp(2rem, 5vw, 4.5rem)", color: "white" }}>
+          <motion.h1 variants={fadeUp} className="font-(family-name:--font-super-warming) title leading-tight" style={{ fontSize: "clamp(2rem, 5vw, 4.5rem)", color: "white" }}>
             About{" "}
             <span style={{
               backgroundImage: "linear-gradient(90deg, #FF9363 0%, #FF9363 30%, #60EEE7 46%, #BBE0EF 83%)",
@@ -263,7 +266,7 @@ export default function ProjectPage({ project, nextProject }: {
             </span>
           </motion.h1>
 
-          <motion.p variants={fadeUp} className="font-(family-name:--font-urbanist) text-sm md:text-lg leading-relaxed mb-6" style={{ color: "rgba(255,255,255)", maxWidth: "480px" }}>
+          <motion.p variants={fadeUp} className="font-(family-name:--font-urbanist) text-sm md:text-lg leading-relaxed mb-6" style={{ color: "rgba(255,255,255)", maxWidth: "650px" }}>
             {project.tagline}
           </motion.p>
 
@@ -302,7 +305,7 @@ export default function ProjectPage({ project, nextProject }: {
                     {heading}
                   </h2>
                 </div>
-                <p className="font-(family-name:--font-urbanist) text-sm md:text-base leading-relaxed pt-1, text-[var(--text)]">
+                <p className="font-(family-name:--font-urbanist) text-sm md:text-base leading-relaxed pt-1, text-[var(--text)] text-justify">
                   {body}
                 </p>
               </div>
@@ -382,6 +385,7 @@ export default function ProjectPage({ project, nextProject }: {
                         {/* Text: left-aligned */}
                         <div style={{ textAlign: "left",
                           paddingTop: 35,
+                          paddingBottom: 14,
                         }}>
                           <p className="font-(family-name:--font-super-warming) text-xs font-bold tracking-[0.18em] uppercase mb-0.5" style={{ color: "var(--accent)" }}>Step {i + 1}</p>
                           <h3 className="font-(family-name:--font-super-warming) text-2xl leading-snug mb-1.5" style={{ color: "var(--primary)" }}>{step.title}</h3>
@@ -485,7 +489,7 @@ export default function ProjectPage({ project, nextProject }: {
                     Result Discussion
                 </h2>
                 </div>
-                <p className="font-(family-name:--font-urbanist) text-sm md:text-base leading-relaxed pt-1 text-[var(--text)]">
+                <p className="font-(family-name:--font-urbanist) text-sm md:text-base leading-relaxed pt-1 text-[var(--text)] text-justify">
                 {project.resultDiscussion}
                 </p>
             </div>
@@ -512,20 +516,32 @@ export default function ProjectPage({ project, nextProject }: {
               viewport={{ once: true, margin: "-6%" }}
             >
               {project.techStack.map((t) => (
-                <motion.div key={t.name} variants={fadeUp} className="flex flex-col items-center gap-2 group">
-                  <div
-                    className="w-14 h-14 rounded-full flex items-center justify-center p-3 transition-transform duration-200 group-hover:scale-110 shadow-sm"
-                    style={{ background: t.bg }}
-                  >
-                    <img src={t.icon} alt={t.name} className="w-full h-full object-contain"
-                      onError={(e) => { (e.target as HTMLImageElement).style.opacity = "0.3"; }} />
-                  </div>
-                  <span className="font-(family-name:--font-urbanist) text-[10px] font-semibold text-center leading-tight"
-                    style={{ color: "color-mix(in srgb, var(--primary) 60%, transparent)" }}>
-                    {t.name}
-                  </span>
-                </motion.div>
-              ))}
+            <motion.div
+              key={t.name}
+              whileHover={{ y: -5, scale: 1.05 }}
+              className="flex flex-col items-center gap-2 group"
+            >
+              {/* Circular Container with Glow */}
+              <div
+                className="w-16 h-16 rounded-full flex items-center justify-center p-4 border border-white/10 shadow-lg"
+                style={{
+                  backgroundColor: `color-mix(in srgb, ${t.bg}, transparent 85%)`,
+                  boxShadow: `0 8px 24px -8px ${t.bg}40`
+                }}
+              >
+                <img
+                  src={t.icon}
+                  alt={t.name}
+                  className="w-full h-full object-contain filter brightness-[1.05]"
+                />
+              </div>
+
+              {/* Label */}
+              <span className="font-(family-name:--font-urbanist) text-[9px] font-bold uppercase tracking-widest text-gray-400 group-hover:text-primary transition-colors">
+                {t.name}
+              </span>
+            </motion.div>
+          ))}
             </motion.div>
           </div>
         </Reveal>
@@ -569,7 +585,7 @@ export default function ProjectPage({ project, nextProject }: {
               </h2>
             </div>
             <p
-              className="font-(family-name:--font-urbanist) text-sm md:text-base leading-relaxed pt-1 text-[var(--text)]"
+              className="font-(family-name:--font-urbanist) text-sm md:text-base leading-relaxed pt-1 text-[var(--text)] text-justify"
             >
               {project.reflection}
             </p>
@@ -655,15 +671,16 @@ export default function ProjectPage({ project, nextProject }: {
                 {nextProject.title}
                 </h3>
             </div>
-            <motion.a
-                href={`/view-project/${nextProject.slug}`}
-                whileHover={{ x: 6 }}
-                transition={{ duration: 0.2 }}
-                className="font-(family-name:--font-super-warming) text-sm tracking-widest flex items-center gap-2 shrink-0"
-                style={{ color: "var(--accent)" }}
+            <Link href={`/view-project/${nextProject.slug}`}>
+            <motion.span
+              whileHover={{ x: 6 }}
+              transition={{ duration: 0.2 }}
+              className="font-(family-name:--font-super-warming) text-sm tracking-widest flex items-center gap-2 shrink-0 cursor-pointer"
+              style={{ color: "var(--accent)" }}
             >
-                View →
-            </motion.a>
+              View →
+            </motion.span>
+          </Link>
             </div>
         </Reveal>
         )}

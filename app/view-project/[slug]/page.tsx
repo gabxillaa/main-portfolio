@@ -23,5 +23,5 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 
   const nextProject = getAdjacentProject(slug);
 
-  return <ProjectPage project={project} nextProject={nextProject} />;
+  return <ProjectPage key={slug} project={project} nextProject={nextProject} />;
 }
