@@ -30,9 +30,13 @@ export default function ProjectFooterSections({ reflection, nextProject }: Proje
                 Looking Back
               </h2>
             </div>
-            <p className="font-(family-name:--font-urbanist) text-sm md:text-base leading-relaxed pt-1 text-[var(--text)] text-justify">
-              {reflection}
-            </p>
+            <div className="font-(family-name:--font-urbanist) text-sm md:text-base leading-relaxed pt-1 text-[var(--text)] text-justify">
+            {reflection.split("\n\n").map((paragraph, i) => (
+              <p key={i} className="mb-4">
+                {paragraph}
+              </p>
+            ))}
+          </div>
           </div>
         </Reveal>
       </div>
@@ -60,7 +64,7 @@ export default function ProjectFooterSections({ reflection, nextProject }: Proje
             </div>
 
             <motion.a
-              href="/#contact"
+              href="/#contact-me"
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.97 }}
               transition={{ duration: 0.18 }}

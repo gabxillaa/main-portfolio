@@ -7,7 +7,7 @@ import { serverContactSchema } from "@/lib/contact-schema";
 const resend    = new Resend(process.env.RESEND_API_KEY);
 const ratelimit = new Ratelimit({
   redis:   Redis.fromEnv(),
-  limiter: Ratelimit.slidingWindow(2, "1 h"), // max 2 submissions per IP per hour
+  limiter: Ratelimit.slidingWindow(3, "1 h"), // max 3 submissions per IP per hour
 });
 
 export async function POST(req: NextRequest) {

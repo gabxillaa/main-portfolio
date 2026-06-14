@@ -31,7 +31,7 @@ const fieldFade: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] } },
 };
 
-const inputClass = "w-full p-3.5 rounded-2xl bg-[#D6E6ED] focus:outline-none text-[#171023] placeholder:text-[#171023]/50";
+const inputClass = "w-full p-3.5 rounded-2xl bg-[#D6E6ED] focus:outline-none text-[#171023] placeholder:text-[#171023]/50 overflow-hiddenw-full p-3.5 rounded-2xl bg-[#D6E6ED] focus:outline-none text-[#171023] placeholder:text-[#171023]/50 overflow-hidden";
 const errorClass = "text-red-300 text-xs mt-1 pl-1";
 
 export default function ContactSection() {
@@ -117,7 +117,7 @@ export default function ContactSection() {
       />
 
       <section
-        id="contact"
+        id="contact-me"
         ref={sectionRef}
         className="flex items-center justify-center min-h-screen w-full p-6 bg-(--background)"
       >
@@ -152,7 +152,7 @@ export default function ContactSection() {
                 </span>
               </motion.h2>
               <motion.p variants={fadeUp} className="font-(family-name:--font-urbanist) text-base md:text-lg text-white/90 max-w-sm leading-relaxed">
-                Have a question? Feedback? A fun idea? Please, please, please send it my way :&gt;
+                Have a question? A project? A fun idea? Please, please, please send it my way :&gt;
               </motion.p>
             </motion.div>
 
@@ -184,7 +184,10 @@ export default function ContactSection() {
 
               <motion.div variants={fieldFade} className="flex flex-col gap-2">
                 <label className="text-white text-xs md:text-sm pl-1 opacity-90">Description (Required)</label>
-                <textarea {...register("message")} placeholder="Tell me about your project or question..." rows={5} className={`${inputClass} resize-none`} />
+                <textarea {...register("message")} placeholder="Tell me about your project or question..." rows={5} className={`${inputClass} resize-none overflow-y-auto pr-3 rounded-2xl`} style={{
+                  scrollbarWidth: "thin",
+                  scrollbarColor: "rgba(23,16,35,0.25) transparent",
+                }}/>
                 {errors.message && <p className={errorClass}>{errors.message.message}</p>}
               </motion.div>
 

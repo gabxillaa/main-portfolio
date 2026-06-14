@@ -59,9 +59,9 @@ techStack: [
   { name: "Next.js",     icon: "https://api.iconify.design/logos:nextjs-icon.svg",       bg: "#e4e4e6" },
   { name: "Tailwind",    icon: "https://api.iconify.design/logos:tailwindcss-icon.svg",  bg: "#ddf1fc" },
   { name: "Flutter",     icon: "https://api.iconify.design/logos:flutter.svg",           bg: "#d9edf8" },
-  { name: "Node.js",     icon: "https://api.iconify.design/logos:nodejs-icon.svg",       bg: "#dff2de" },
+  { name: "Node.js",     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg", bg: "#E2F5E5" },
   { name: "Express",     icon: "https://api.iconify.design/simple-icons:express.svg",    bg: "#e4e4e6" },
-  { name: "Firebase",    icon: "https://api.iconify.design/logos:firebase.svg",          bg: "#fef2dc" },
+  { name: "Firebase",    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg", bg: "#FDF1D6" },
   { name: "Python",      icon: "https://api.iconify.design/logos:python.svg",            bg: "#dce9f5" },
   { name: "TensorFlow",  icon: "https://api.iconify.design/simple-icons:tensorflow.svg", bg: "#fdeede" },
   { name: "Keras",       icon: "https://api.iconify.design/simple-icons:keras.svg",      bg: "#e4e4e6" },
@@ -78,5 +78,12 @@ techStack: [
     { src: "/assets/moldify/Moldify-Mobile.png", alt: "Detection result" },
   ],
 
-  reflection: `Moldify was my most complete project at that point, with real users, workflows, and constraints. As a frontend experience, it pushed me to design for very different user needs, from farmers submitting reports to administrators managing cases, all within one consistent system. The results were mixed but insightful. IT experts rated it “Excellent,” but the SUS score from non-IT users was 58.98 (“Fair”). From a frontend perspective, that made it clear that usability isn’t just about design consistency, but also performance, response times, and how the interface behaves under real-world conditions. If I rebuilt it, I’d involve non-technical users earlier and treat usability and performance as core parts of the UI, not final checks.`,
+  reflection: `Moldify was my most complete project at that point, with real users, workflows, and constraints. As a frontend experience, it pushed me to design for very different user needs, from farmers submitting reports to administrators managing cases, all within one consistent system. The project itself was interesting because it tackled mold-related reporting under mycology, a niche area that not many people focus on, which made it feel meaningful to work on.
+
+At the same time, it was honestly one of the more frustrating projects I’ve worked on. We were a team of three, but the system features were not clearly defined early on, which led to repeated delays and constant rework. The team dynamic also wasn’t ideal, and there wasn’t strong coordination, which affected both timeline and overall quality.
+
+Despite that, I really enjoyed the frontend side of it. It made me realize how important empathy is in UI/UX, especially since many of the users were farmers who weren’t tech-savvy. That forced me to think more carefully about how to simplify interactions and make the system more intuitive for them, not just functional.
+
+The results were mixed but insightful. IT experts rated it “Excellent,” but the SUS score from non-IT users was 58.98 (“Fair”). From a frontend perspective, that made it clear that usability isn’t just about visual consistency, but also performance, response times, and how the interface behaves under real-world use. If I were to rebuild it, I would involve end users much earlier and treat usability and performance as core parts of the design process rather than final checks.
+`,
 };

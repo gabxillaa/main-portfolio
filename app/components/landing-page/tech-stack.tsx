@@ -3,22 +3,21 @@
 import React from "react";
 import {
   SiTypescript, SiNextdotjs, SiFlutter, SiFirebase,
-  SiTailwindcss, SiReact, SiPython, SiFigma, SiGit,
+  SiTailwindcss, SiUnity, SiMiro, SiFigma, SiGit,
 } from "react-icons/si";
 import { motion } from "framer-motion";
 
 const TECHS = [
   { name: "TypeScript", icon: SiTypescript, color: "#3178C6", bg: "#deeaf7", tag: "Language" },
-  { name: "React",      icon: SiReact,      color: "#61DAFB", bg: "#e0f7fd", tag: "Web"      },
+  { name: "Flutter",    icon: SiFlutter,    color: "#54C5F8", bg: "#ddf2fb", tag: "Mobile"      },
   { name: "Next.js",    icon: SiNextdotjs,  color: "#111111", bg: "#e4e4e6", tag: "Web"      },
-  { name: "Flutter",    icon: SiFlutter,    color: "#54C5F8", bg: "#ddf2fb", tag: "Mobile"   },
+  { name: "Unity",      icon: SiUnity,       color: "#000000", bg: "#e4e4e6", tag: "Tool"   },
   { name: "Tailwind",   icon: SiTailwindcss,color: "#38BDF8", bg: "#ddf1fc", tag: "Web"      },
-  { name: "Python",     icon: SiPython,     color: "#3572A5", bg: "#e4ecf5", tag: "Language" },
+  { name: "Git",        icon: SiGit,        color: "#F05032", bg: "#fde8e4", tag: "Tool"     },
   { name: "Firebase",   icon: SiFirebase,   color: "#FFA611", bg: "#fef2dc", tag: "Backend"  },
   { name: "Figma",      icon: SiFigma,      color: "#F24E1E", bg: "#fde8e2", tag: "Design"   },
-  { name: "Git",        icon: SiGit,        color: "#F05032", bg: "#fde8e4", tag: "Tool"     },
+  { name: "Miro",       icon: SiMiro,       color: "#FFA611", bg: "#fef2dc", tag: "Design"   },
 ];
-
 
 
 const PARTICLES = [
@@ -78,10 +77,10 @@ export default function TechStack() {
         </motion.span>
       ))}
 
-      <div className="relative z-10 w-full max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-16">
+      <div className="relative z-10 w-full max-w-6xl mx-auto flex flex-col md:flex-row items-start gap-10 lg:gap-16">
 
         {/* ── Left: text ── */}
-        <div className="flex-none md:w-72 flex flex-col gap-4">
+        <div className="w-full md:w-64 lg:w-72 shrink-0 flex flex-col gap-4">
           <p
             className="text-[11px] font-(family-name:--font-super-warming) font-bold tracking-[.22em] uppercase"
             style={{ color: "var(--accent)" }}
@@ -120,7 +119,7 @@ export default function TechStack() {
         />
 
         {/* ── Right: grid ── */}
-        <div className="flex-1 grid grid-cols-3 gap-3">
+        <div className="flex-1 w-full min-w-0 grid grid-cols-3 gap-3 md:gap-4">
           {TECHS.map((tech, i) => (
             <motion.div
               key={tech.name}

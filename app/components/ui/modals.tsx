@@ -21,16 +21,22 @@ export default function Modal({
   isOpen, onClose, children, heading, subtext, primaryButton, secondaryButton
 }: ModalProps) {
     useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-    // Cleanup on unmount
-    return () => {
-      document.body.style.overflow = "unset";
-    };
-  }, [isOpen]);
+  const html = document.documentElement;
+  const body = document.body;
+
+  if (isOpen) {
+    html.style.overflow = "hidden";
+    body.style.overflow = "hidden";
+  } else {
+    html.style.overflow = "";
+    body.style.overflow = "";
+  }
+
+  return () => {
+    html.style.overflow = "";
+    body.style.overflow = "";
+  };
+}, [isOpen]);
   return (
     <AnimatePresence>
       {isOpen && (
@@ -53,7 +59,7 @@ export default function Modal({
             className="fixed inset-0 z-50 flex items-center justify-center p-6"
           >
             {/* Solid Card */}
-            <div className="relative w-full max-w-md pointer-events-auto bg-[#10184F] p-8 rounded-3xl border-4 border-white/5 shadow-2xl">
+            <div className="relative w-full max-w-md pointer-events-auto bg-[#10184F] p-8 rounded-3xl border-4 border-white/5 shadow-2xl max-h-[90vh] overflow-hidden flex flex-col">
 
               {/* Decorative Accent Dots (The "Fun" Element) */}
                 <div className="absolute top-6 left-6 flex gap-1.5">
@@ -84,11 +90,13 @@ export default function Modal({
               )}
 
               {/* Content */}
-              <div className="mb-8">{children}</div>
+              <div className="overflow-y-auto flex-1 min-h-0 pr-5" style={{ scrollbarWidth: "thin", scrollbarColor: "rgba(255,255,255,0.1) transparent" }}>
+                {children}
+              </div>
 
               {/* Solid Accent Buttons */}
               {(primaryButton || secondaryButton) && (
-                <div className="flex flex-col gap-3">
+                <div className="flex flex-col gap-3 mt-4 shrink-0">
                   {primaryButton && (
                     <button
                       onClick={primaryButton.onClick}
