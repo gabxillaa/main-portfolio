@@ -32,7 +32,7 @@ function ConfettiPiece({ x, color, symbol, delay }: {
 
 type ConfettiItem = { id: number; x: number; color: string; symbol: string; delay: number };
 
-// ── No escape messages ────────────────────────────────────────────────────────
+// ── No escape messages ───────────────────────────────────────────────────────
 const ESCAPE_MESSAGES = [
   "No",
   "Nice try",
