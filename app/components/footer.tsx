@@ -29,12 +29,12 @@ export default function Footer() {
         <div className="relative z-10 max-w-7xl mx-auto flex flex-wrap justify-between items-start gap-12 pb-16">
           {/* Left Side Content */}
           <div className="space-y-4 flex-1 min-w-[300px]">
-            <h3 className="text-4xl font-bold font-(family-name:--font-super-warming)">Lorem Ipsum</h3>
+            <h3 className="text-4xl  font-(family-name:--font-super-warming)">  Got a cool idea? </h3>
             <p className="max-w-xs text-base text-white/90 font-(family-name:--font-urbanist)">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              I love turning ideas into simple, usable interfaces that people actually enjoy using.
             </p>
             <button
-              className="px-6 py-2.5 font-bold text-white tracking-wider rounded-full font-(family-name:--font-super-warming)"
+              className="px-6 py-2.5  text-white tracking-wider rounded-full font-(family-name:--font-super-warming)"
               style={{ background: 'linear-gradient(90deg, #FF9363 0%, #F54C00 100%)' }}
             >
               Download Resume
@@ -47,9 +47,9 @@ export default function Footer() {
             <div className="flex gap-3">
               {[
                 { href: 'https://www.linkedin.com/in/faith-gabrielle-gamboa/', Icon: FaLinkedin, label: 'LinkedIn' },
-                { href: 'https://github.com/your-username', Icon: FaGithub, label: 'GitHub' },
-                { href: 'mailto:your@email.com', Icon: FaEnvelope, label: 'Email' },
-                { href: 'tel:+1234567890', Icon: FaPhone, label: 'Phone' },
+                { href: 'https://github.com/gabxillaa', Icon: FaGithub, label: 'GitHub' },
+                { href: 'mailto:faithgabriellegamboa046@gmail.com', Icon: FaEnvelope, label: 'Email' },
+                { href: 'tel:+639674306842', Icon: FaPhone, label: 'Phone' },
               ].map(({ href, Icon, label }, i) => (
                 <a
                   key={i}

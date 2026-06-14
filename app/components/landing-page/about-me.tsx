@@ -105,7 +105,7 @@ export default function AboutMe() {
             <span className="font-(family-name:--font-super-warming) text-xs font-black uppercase tracking-[0.3em] text-(--accent) block mb-3">
               Get To Know Me
             </span>
-            <h2 className="font-(family-name:--font-super-warming) text-5xl sm:text-6xl md:text-7xl font-black tracking-wide uppercase leading-[0.85] text-(--primary)">
+            <h2 className="font-(family-name:--font-super-warming) text-5xl font-black tracking-wide uppercase leading-[0.85] text-(--primary)">
               Creative <br />
               <span
                 className="text-(--accent)"
@@ -116,19 +116,22 @@ export default function AboutMe() {
             </h2>
           </motion.div>
 
-          <motion.p
+          <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-(family-name:--font-urbanist) text-base leading-relaxed text-justify"
-            style={{ color: "color-mix(in srgb, var(--text) 60%, transparent)" }}
+            className="font-(family-name:--font-urbanist) text-base leading-relaxed text-justify space-y-4"
+            style={{ color: "color-mix(in srgb, var(--text)" }}
           >
-            I'm a UI/UX designer and front-end developer who genuinely cares about how things look
-            and how they feel to use. I'm still early in my journey; and honestly, that excites me.
-            Every project is a chance to learn something new, try something I haven't tried before,
-            and get a little better than yesterday.
-          </motion.p>
+            {`I'm a frontend developer and UI/UX designer passionate about building intuitive, user-centered digital experiences. Throughout my academic projects, I've worked on mobile apps, web platforms, desktop systems, and even game development, translating ideas and requirements into interfaces that are both functional and easy to use.
+
+          What drives my work is empathy for the end user. I enjoy understanding how people interact with technology and finding ways to make those interactions simpler, more intuitive, and more meaningful. To me, good design is not just about how something looks, but how effectively it helps users achieve their goals.
+
+          `.split("\n\n").map((p, i) => (
+              <p key={i}>{p}</p>
+            ))}
+          </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 15 }}
