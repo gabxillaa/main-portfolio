@@ -105,7 +105,7 @@ export default function AboutMe() {
             <span className="font-(family-name:--font-super-warming) text-xs font-black uppercase tracking-[0.3em] text-(--accent) block mb-3">
               Get To Know Me
             </span>
-            <h2 className="font-(family-name:--font-super-warming) text-5xl font-black tracking-wide uppercase leading-[0.85] text-(--primary)">
+            <h2 className="font-(family-name:--font-super-warming) text-5xl md:text-6xl lg:text-7xl font-black tracking-wide uppercase leading-[0.85] text-(--primary)">
               Creative <br />
               <span
                 className="text-(--accent)"

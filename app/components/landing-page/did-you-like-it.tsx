@@ -178,9 +178,8 @@ export default function DidYouLikeIt() {
                     Quick question
                   </span>
                   <h2
-                    className="font-(family-name:--font-super-warming) font-black uppercase tracking-wide leading-none"
+                    className="font-(family-name:--font-super-warming) font-black uppercase tracking-wide leading-none text-5xl md:text-6xl lg:text-7xl"
                     style={{
-                      fontSize: "clamp(2rem, 6vw, 4.5rem)",
                       color: "var(--primary)",
                       textShadow: "0 4px 30px color-mix(in srgb, var(--primary) 8%, transparent)",
                     }}

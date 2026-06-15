@@ -249,7 +249,7 @@ export default function Hero() {
 
             {/* Main Headline: Maintaining your scale */}
             <motion.h1
-              className="glowing-crawl-text font-(family-name:--font-super-warming) text-5xl sm:text-7xl md:text-8xl lg:text-[12rem] leading-[0.9] tracking-[-0.02em] drop-shadow-[0_0_35px_rgba(255,255,255,0.2)]"
+              className="glowing-crawl-text font-(family-name:--font-super-warming) text-7xl md:text-8xl lg:text-[12rem] leading-[0.9] tracking-[-0.02em] drop-shadow-[0_0_35px_rgba(255,255,255,0.2)]"
               initial={{ opacity: 0, y: 60, skewY: 2 }}
               animate={entered ? {
                 opacity: 1,

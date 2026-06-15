@@ -255,8 +255,7 @@ function endDrag(e: React.PointerEvent<HTMLDivElement>) {
         ref={sectionRef}
         className="relative flex flex-col items-center overflow-hidden w-full bg-(--background)"
         style={{
-          minHeight: "clamp(560px, 100dvh, 1000px)",
-          paddingBottom: "env(safe-area-inset-bottom, 0px)",
+          paddingBottom: "calc(8px + env(safe-area-inset-bottom, 0px))"
         }}
       >
       {/* ── Ambient glows — fade in ── */}
@@ -346,8 +345,8 @@ function endDrag(e: React.PointerEvent<HTMLDivElement>) {
         </div>
 
         <h2
-          className="font-(family-name:--font-super-warming) font-black text-(--primary) uppercase tracking-wide leading-none"
-          style={{ fontSize: "clamp(1.8rem, 7vw, 5rem)", textShadow: "0 4px 30px color-mix(in srgb, var(--primary) 8%, transparent)" }}
+          className="font-(family-name:--font-super-warming) font-black text-(--primary) uppercase tracking-wide leading-none text-5xl md:text-6xl lg:text-7xl"
+          style={{ textShadow: "0 4px 30px color-mix(in srgb, var(--primary) 8%, transparent)" }}
         >
           Things I&apos;ve{" "}
           <span className="text-(--accent)" style={{ textShadow: "0 4px 30px color-mix(in srgb, var(--accent) 30%, transparent)" }}>Built</span>
