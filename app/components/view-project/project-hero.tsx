@@ -18,16 +18,17 @@ export default function ProjectHero({ project }: ProjectHeroProps) {
 
   return (
     <div
-      ref={ref}
-      className="relative w-full overflow-hidden flex flex-col"
-      style={{
-        background:
-          "radial-gradient(ellipse at 50% 40%, #161e54 0%, #131b52 38%, #10184f 76%)",
-        // Content-driven height — no minHeight hardcode.
-        // pb accounts for the curved SVG overlap (72px) + breathing room.
-        paddingBottom: "clamp(5rem, 10vw, 7rem)",
-      }}
-    >
+        ref={ref}
+        className="relative w-full overflow-hidden flex flex-col"
+        style={{
+          background:
+            "radial-gradient(ellipse at 50% 40%, #161e54 0%, #131b52 38%, #10184f 76%)",
+          paddingBottom: "clamp(5rem, 10vw, 7rem)",
+          minHeight: project.liveUrl
+            ? undefined
+            : "clamp(20rem, 60vw, 28rem)",
+        }}
+      >
       {/* Centre ambient blob */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <div
@@ -75,21 +76,21 @@ export default function ProjectHero({ project }: ProjectHeroProps) {
 
       {/* Hero text */}
       <motion.div
-        variants={stagger}
-        initial="hidden"
-        animate={inView ? "visible" : "hidden"}
-        className="relative z-10 flex flex-col max-w-screen-lg mx-auto w-full px-8 md:px-16"
-        style={{
-          // Top padding: enough clearance for the Go Back button + visual breathing room.
-          // Shrinks on mobile so content isn't pushed far down.
-          paddingTop: "clamp(4rem, 8vw, 6rem)",
-          // Bottom gap before the SVG curve eats into space.
-          paddingBottom: "clamp(1.5rem, 3vw, 2.5rem)",
-        }}
-      >
+          variants={stagger}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          className="relative z-10 flex flex-col max-w-screen-lg mx-auto w-full px-8 md:px-16 py-20 "
+          style={{
+            paddingTop: "clamp(4rem, 8vw, 6rem)",
+            paddingBottom: "clamp(1.5rem, 3vw, 2.5rem)",
+            flexGrow: project.liveUrl ? undefined : 1,
+            justifyContent: project.liveUrl ? undefined : "center",
+            minHeight: project.liveUrl ? undefined : 0,
+          }}
+        >
         <motion.h1
           variants={fadeUp}
-          className="font-(family-name:--font-super-warming) title leading-tight mb-3"
+          className="font-(family-name:--font-super-warming) title leading-tight mb-3 pt-10"
           style={{ fontSize: "clamp(2rem, 5vw, 4.5rem)", color: "white" }}
         >
           About{" "}
