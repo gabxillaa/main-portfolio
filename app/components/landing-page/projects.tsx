@@ -73,11 +73,12 @@ export default function ArcCarousel() {
   const rafRef       = useRef<number>(0);
   const offsetRef    = useRef(0);
   const pausedRef    = useRef(false);
-  const dragRef = useRef<{ active: boolean; startX: number; startOffset: number; moved: boolean }>({
+  const dragRef = useRef<{ active: boolean; startX: number; startOffset: number; moved: boolean; trackLen: number }>({
     active: false,
     startX: 0,
     startOffset: 0,
     moved: false,
+    trackLen: 0,
   });
   const hoveredIdxRef    = useRef<number | null>(null);
   const hoverProgressRef = useRef<Map<number, number>>(new Map());
@@ -188,26 +189,38 @@ export default function ArcCarousel() {
 
   // ── Pointer handlers — all card-level now ─────────────────────────────────
     function onCardPointerDown(e: React.PointerEvent<HTMLDivElement>) {
-      pausedRef.current = true;
-      dragRef.current = {
-        active:      true,
-        startX:      e.clientX,
-        startOffset: offsetRef.current,
-        moved:       false,
-      };
-      (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
-      e.stopPropagation();
-    }
+  pausedRef.current = true;
+  dragRef.current = {
+    active:      true,
+    startX:      e.clientX,
+    startOffset: offsetRef.current,
+    moved:       false,
+    trackLen:    PROJECTS.length * (dims.cardW + dims.gap),
+  };
+  try {
+    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+  } catch {}
+  e.stopPropagation();
+}
 
-    function onCardPointerMove(e: React.PointerEvent<HTMLDivElement>) {
-      if (!dragRef.current.active) return;
-      const delta = Math.abs(e.clientX - dragRef.current.startX);
-      if (delta > 6) dragRef.current.moved = true;
-      const trackLen    = PROJECTS.length * (dims.cardW + dims.gap);
-      const offsetDelta = dragRef.current.startX - e.clientX;
-      offsetRef.current = ((dragRef.current.startOffset + offsetDelta) % trackLen + trackLen) % trackLen;
-      e.stopPropagation();
-    }
+function onCardPointerMove(e: React.PointerEvent<HTMLDivElement>) {
+  if (!dragRef.current.active) return;
+  const delta = Math.abs(e.clientX - dragRef.current.startX);
+  if (delta > 6) dragRef.current.moved = true;
+  const trackLen    = dragRef.current.trackLen;
+  const offsetDelta = dragRef.current.startX - e.clientX;
+  offsetRef.current = ((dragRef.current.startOffset + offsetDelta) % trackLen + trackLen) % trackLen;
+  e.stopPropagation();
+}
+
+function endDrag(e: React.PointerEvent<HTMLDivElement>) {
+  dragRef.current.active = false;
+  try {
+    (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId);
+  } catch {}
+  setTimeout(() => { pausedRef.current = false; }, 1200);
+  e.stopPropagation();
+}
 
     function onCardPointerUp(e: React.PointerEvent<HTMLDivElement>) {
       dragRef.current.active = false;
@@ -394,10 +407,12 @@ export default function ArcCarousel() {
                 onPointerDown={onCardPointerDown}
                 onPointerMove={onCardPointerMove}
                 onPointerUp={onCardPointerUp}
+                onPointerCancel={endDrag}
                 style={{
                   position:        "absolute",
                   borderRadius:    16,
                   willChange:      "transform, opacity, box-shadow, bottom",
+                  touchAction:     "none",
                   transformOrigin: "bottom center",
                   cursor:          "pointer",
                   pointerEvents:   "auto",
