@@ -40,13 +40,13 @@ const arcOpacity = (n: number) => {
 };
 
 // ── Responsive dims ───────────────────────────────────────────────────────────
-type Dims = { cardW: number; cardH: number; gap: number; arcDepth: number; wrapH: number; speed: number };
+type Dims = { cardW: number; cardH: number; gap: number; arcDepth: number; wrapH: number; speed: number; dragMultiplier: number; showButton: boolean };
 
 function getDims(vw: number): Dims {
-  if (vw < 480)  return { cardW: 120, cardH: 170, gap: 12, arcDepth: 40, wrapH: 210, speed: 0.45 };
-  if (vw < 768)  return { cardW: 155, cardH: 218, gap: 16, arcDepth: 52, wrapH: 265, speed: 0.50 };
-  if (vw < 1024) return { cardW: 178, cardH: 248, gap: 18, arcDepth: 62, wrapH: 295, speed: 0.52 };
-  return               { cardW: 200, cardH: 280, gap: 20, arcDepth: 70, wrapH: 330, speed: 0.55 };
+  if (vw < 480)  return { cardW: 120, cardH: 170, gap: 12, arcDepth: 40, wrapH: 210, speed: 0.9,  dragMultiplier: 1.6, showButton: false };
+  if (vw < 768)  return { cardW: 155, cardH: 218, gap: 16, arcDepth: 52, wrapH: 265, speed: 0.85, dragMultiplier: 1.4, showButton: true  };
+  if (vw < 1024) return { cardW: 178, cardH: 248, gap: 18, arcDepth: 62, wrapH: 295, speed: 0.7,  dragMultiplier: 1.2, showButton: true  };
+  return               { cardW: 200, cardH: 280, gap: 20, arcDepth: 70, wrapH: 330, speed: 0.55, dragMultiplier: 1,   showButton: true  };
 }
 
 // ── Animation variants ────────────────────────────────────────────────────────
@@ -208,7 +208,7 @@ function onCardPointerMove(e: React.PointerEvent<HTMLDivElement>) {
   const delta = Math.abs(e.clientX - dragRef.current.startX);
   if (delta > 6) dragRef.current.moved = true;
   const trackLen    = dragRef.current.trackLen;
-  const offsetDelta = dragRef.current.startX - e.clientX;
+  const offsetDelta = (dragRef.current.startX - e.clientX) * dims.dragMultiplier;
   offsetRef.current = ((dragRef.current.startOffset + offsetDelta) % trackLen + trackLen) % trackLen;
   e.stopPropagation();
 }
@@ -251,11 +251,14 @@ function endDrag(e: React.PointerEvent<HTMLDivElement>) {
 
   return (
     <section
-      id="projects"
-      ref={sectionRef}
-      className="relative flex flex-col items-center overflow-hidden w-full bg-(--background)"
-      style={{ minHeight: "100dvh", paddingBottom: "env(safe-area-inset-bottom, 0px)" }}
-    >
+        id="projects"
+        ref={sectionRef}
+        className="relative flex flex-col items-center overflow-hidden w-full bg-(--background)"
+        style={{
+          minHeight: "clamp(560px, 100dvh, 1000px)",
+          paddingBottom: "env(safe-area-inset-bottom, 0px)",
+        }}
+      >
       {/* ── Ambient glows — fade in ── */}
       <motion.div
         variants={fadeIn}
@@ -331,8 +334,8 @@ function endDrag(e: React.PointerEvent<HTMLDivElement>) {
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
         transition={{ delay: 0.15 }}
-        className="relative text-center z-10 px-4 pt-20 pb-2 shrink-0"
-        style={{ overflow: "visible" }}
+        className="relative text-center z-10 px-4 pb-2 shrink-0"
+        style={{ overflow: "visible", paddingTop: "clamp(2.5rem, 8vh, 5rem)" }}
       >
         <div className="absolute hidden xl:flex flex-col items-start" style={{ right: "calc(100% + 16px)", top: 68, overflow: "visible" }}>
           <span style={{ fontFamily: "cursive", fontSize: 15, color: "var(--primary)", whiteSpace: "nowrap", opacity: 0.75, transform: "rotate(-10deg)", display: "block", transformOrigin: "left center" }}>check these out</span>
@@ -346,7 +349,7 @@ function endDrag(e: React.PointerEvent<HTMLDivElement>) {
           className="font-(family-name:--font-super-warming) font-black text-(--primary) uppercase tracking-wide leading-none"
           style={{ fontSize: "clamp(1.8rem, 7vw, 5rem)", textShadow: "0 4px 30px color-mix(in srgb, var(--primary) 8%, transparent)" }}
         >
-          These are the things I&apos;ve{" "}
+          Things I&apos;ve{" "}
           <span className="text-(--accent)" style={{ textShadow: "0 4px 30px color-mix(in srgb, var(--accent) 30%, transparent)" }}>Built</span>
         </h2>
 
@@ -366,7 +369,7 @@ function endDrag(e: React.PointerEvent<HTMLDivElement>) {
         animate={isInView ? "visible" : "hidden"}
         transition={{ delay: 0.3 }}
         className="font-(family-name:--font-urbanist) text-sm md:text-base mt-4 mb-0 max-w-xs md:max-w-sm text-center leading-relaxed relative z-10 px-6 shrink-0"
-        style={{ color: "color-mix(in srgb, var(--text) 50%, transparent)" }}
+        style={{ color: "color-mix(in srgb, var(--text) 50%, transparent)", marginTop: "clamp(0.75rem, 2vh, 1rem)" }}
       >
         A curated collection of my favorite projects — each one a story worth telling.
       </motion.p>
@@ -378,7 +381,7 @@ function endDrag(e: React.PointerEvent<HTMLDivElement>) {
           animate={isInView ? "visible" : "hidden"}
           transition={{ delay: 0.5 }}
           className="relative w-full z-10 shrink-0 select-none"
-          style={{ height: dims.wrapH, marginTop: 48, cursor: "grab", overflow: "visible" }}
+          style={{ height: dims.wrapH, marginTop: "clamp(16px, 4vh, 48px)", cursor: "grab", overflow: "visible" }}
           onMouseLeave={() => {
             pausedRef.current   = false;
             dragRef.current.active = false;
@@ -457,29 +460,31 @@ function endDrag(e: React.PointerEvent<HTMLDivElement>) {
                     opacity: 0,
                     transition: "opacity 0.01s linear",
                   }}>
-                    <span className="arc-title-hover font-(family-name:--font-super-warming) text-white uppercase text-center" style={{ fontSize: dims.cardW * 0.09, fontWeight: 700, lineHeight: 1.1, letterSpacing: "0.05em", textShadow: "0 2px 16px rgba(0,0,0,0.5)" }}>
+                    <span className="arc-title-hover font-(family-name:--font-super-warming) text-white uppercase text-center" style={{ fontSize: dims.cardW * (dims.showButton ? 0.09 : 0.11), fontWeight: 700, lineHeight: 1.1, letterSpacing: "0.05em", textShadow: "0 2px 16px rgba(0,0,0,0.5)" }}>
                       {proj.title}
                     </span>
-                    <span
-                      className="font-(family-name:--font-urbanist)"
-                      style={{
-                        display: "inline-flex", alignItems: "center", gap: 5,
-                        background: "var(--accent)",
-                        color: "#fff",
-                        fontWeight: 700,
-                        fontSize: dims.cardW * 0.056,
-                        letterSpacing: "0.07em",
-                        textTransform: "uppercase",
-                        padding: `${dims.cardW * 0.032}px ${dims.cardW * 0.1}px`,
-                        borderRadius: 999,
-                        boxShadow: "0 4px 20px rgba(255,132,75,0.45), 0 2px 8px rgba(0,0,0,0.3)",
-                        whiteSpace: "nowrap",
-                        marginTop: dims.cardW * 0.02,
-                      }}
-                    >
-                      View Project
-                      <span style={{ fontSize: dims.cardW * 0.07 }}>→</span>
-                    </span>
+                    {dims.showButton && (
+                      <span
+                        className="font-(family-name:--font-urbanist)"
+                        style={{
+                          display: "inline-flex", alignItems: "center", gap: 5,
+                          background: "var(--accent)",
+                          color: "#fff",
+                          fontWeight: 700,
+                          fontSize: dims.cardW * 0.056,
+                          letterSpacing: "0.07em",
+                          textTransform: "uppercase",
+                          padding: `${dims.cardW * 0.032}px ${dims.cardW * 0.1}px`,
+                          borderRadius: 999,
+                          boxShadow: "0 4px 20px rgba(255,132,75,0.45), 0 2px 8px rgba(0,0,0,0.3)",
+                          whiteSpace: "nowrap",
+                          marginTop: dims.cardW * 0.02,
+                        }}
+                      >
+                        View Project
+                        <span style={{ fontSize: dims.cardW * 0.07 }}>→</span>
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>
