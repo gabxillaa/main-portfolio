@@ -346,7 +346,7 @@ function endDrag(e: React.PointerEvent<HTMLDivElement>) {
           className="font-(family-name:--font-super-warming) font-black text-(--primary) uppercase tracking-wide leading-none"
           style={{ fontSize: "clamp(1.8rem, 7vw, 5rem)", textShadow: "0 4px 30px color-mix(in srgb, var(--primary) 8%, transparent)" }}
         >
-          Things I&apos;ve{" "}
+          Thingsssss I&apos;ve{" "}
           <span className="text-(--accent)" style={{ textShadow: "0 4px 30px color-mix(in srgb, var(--accent) 30%, transparent)" }}>Built</span>
         </h2>
 
