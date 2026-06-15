@@ -163,7 +163,7 @@ export default function ContactSection() {
               onSubmit={handleSubmit(onSubmit)}
               className="space-y-5 font-(family-name:--font-urbanist)"
             >
-              <motion.div variants={fieldFade} className="grid grid-cols-2 gap-4">
+              <motion.div variants={fieldFade} className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="flex flex-col gap-2">
                   <label className="text-white text-xs md:text-sm pl-1 opacity-90">First Name</label>
                   <input {...register("firstName")} placeholder="First name" type="text" className={inputClass} />
