@@ -17,7 +17,7 @@ const display = localFont({
 
 export const metadata: Metadata = {
   title: "Faith-Portfolio",
-  description: " ",
+  description: "A creative developer's portfolio showcasing a blend of design and code, featuring interactive projects that highlight a passion for clean, user-centered digital experiences.",
 };
 
 export default function RootLayout({
