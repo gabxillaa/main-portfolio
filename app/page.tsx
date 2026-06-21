@@ -17,8 +17,6 @@ export default function Home() {
       <Divider />
       <ArcCarousel />
       <Divider />
-      <DidYouLikeIt />
-      <Divider />
       <TechStack />
       <Divider />
       <ContactSection />
