@@ -10,24 +10,18 @@ export default function EditorialHero() {
       opacity: 0;
       animation: subtleFadeUp 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
-    .dotted-overlay {
-      position: absolute;
-      inset: 0;
-      background-image: radial-gradient(var(--dark-green) 1px, transparent 1px);
-      background-size: 24px 24px;
-      opacity: 0.2;
-      pointer-events: none;
-      z-index: 0;
-    }
   `;
 
   return (
-    <div className="h-screen max-h-[100vh] bg-[var(--background)] text-[var(--dark-green)] selection:bg-[var(--primary)] selection:text-[var(--background)] flex flex-col justify-between px-6 md:px-12 lg:px-16 font-sans overflow-hidden relative">
+    /* FIXED: Changed to <section> and added id="home" so the navbar links work perfectly */
+    <section
+      id="home"
+      className="h-screen max-h-[100vh] bg-[var(--background)] text-[var(--dark-green)] selection:bg-[var(--dark-green)] selection:text-[var(--background)] flex flex-col justify-between px-6 md:px-12 lg:px-16 font-sans overflow-hidden relative"
+    >
 
       <style dangerouslySetInnerHTML={{ __html: animationStyles }} />
 
-      {/* DOTTED BACKGROUND OVERLAY */}
-      <div className="dotted-overlay" />
+
 
       {/* HEADER NAVIGATION CONSTRAINT */}
       <header className="w-full z-50 flex-shrink-0">
@@ -62,14 +56,13 @@ export default function EditorialHero() {
 
         {/* Balanced Body Block */}
         <div className="editorial-reveal" style={{ animationDelay: '600ms' }}>
-          <p className="text-sm md:text-base text-[var(--light-gray)] leading-relaxed max-w-2xl font-sans font-light">
-            Bridging pixel-perfect high-fidelity designs with clean, production-ready React ecosystems.
-            Designing frameworks that think like interfaces, and building code that respects typography.
+          <p className="text-sm sm:text-base md:text-lg text-[var(--dark-green)] leading-relaxed max-w-3xl font-[family-name:var(--font-body)] font-light">
+            I design interfaces and build the code behind them. From wireframes to working products, I care about how things look, how they feel, and how they hold up when real people use them.
           </p>
         </div>
 
       </main>
 
-    </div>
+    </section>
   );
 }

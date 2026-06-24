@@ -13,11 +13,11 @@ interface ProjectGalleryProps {
 
 export default function ProjectGallery({ images, title }: ProjectGalleryProps) {
   return (
-    <div className="max-w-screen-lg mx-auto px-8 md:px-16 py-12">
+    <div className="max-w-screen-lg mx-auto px-8 md:px-16 py-12 bg-[var(--background)]">
       <Reveal className="mb-8">
         <SectionLabel>Gallery</SectionLabel>
         <h2
-          className="font-(family-name:--font-super-warming) text-2xl md:text-3xl"
+          className="font-[family-name:var(--font-display)] text-2xl md:text-3xl uppercase tracking-tight"
           style={{ color: "var(--primary)" }}
         >
           A Closer <span style={{ color: "var(--accent)" }}>Look</span>
@@ -42,9 +42,10 @@ function GalleryCarousel({
   const [active, setActive] = useState(0);
   const [direction, setDirection] = useState(1);
 
-    const [imageDimensions, setImageDimensions] = useState<
+  const [imageDimensions, setImageDimensions] = useState<
     Record<number, { w: number; h: number }>
-    >({});
+  >({});
+
   const go = (idx: number) => {
     setDirection(idx > active ? 1 : -1);
     setActive(idx);
@@ -52,33 +53,31 @@ function GalleryCarousel({
   const prev = () => go((active - 1 + images.length) % images.length);
   const next = () => go((active + 1) % images.length);
 
-  // Replace the handleLoad function
-    const handleLoad = (
+  const handleLoad = (
     idx: number,
     e: React.SyntheticEvent<HTMLImageElement>
-    ) => {
+  ) => {
     const { naturalWidth: w, naturalHeight: h } = e.currentTarget;
     setImageDimensions((dims) => ({ ...dims, [idx]: { w, h } }));
-    };
+  };
 
-  // Derive ratio from loaded dims; fall back to 16/9 until first image loads
   const dims = imageDimensions[active];
   const aspectRatio = dims ? `${dims.w} / ${dims.h}` : "16 / 9";
 
   return (
     <div className="w-full select-none">
-      <div className="relative">
-        {/* Ghost index */}
+      <div className="relative group/carousel">
+        {/* Ghost index using Shanolia display font */}
         <div
           className="absolute pointer-events-none select-none"
           style={{
             top: "50%",
             right: "1rem",
             transform: "translateY(-65%)",
-            fontFamily: "var(--font-super-warming)",
+            fontFamily: "var(--font-display)",
             fontSize: "clamp(6rem, 18vw, 14rem)",
             lineHeight: 1,
-            color: "rgba(19,27,82,0.05)",
+            color: "rgba(19,27,82,0.04)",
             letterSpacing: "-0.04em",
             zIndex: 0,
           }}
@@ -86,10 +85,10 @@ function GalleryCarousel({
           {String(active + 1).padStart(2, "0")}
         </div>
 
-        {/* Main image — aspect ratio follows the active image's natural dimensions */}
+        {/* Main image container */}
         <div
-          className="relative rounded-2xl overflow-hidden shadow-lg"
-          style={{ aspectRatio, zIndex: 1, transition: "aspect-ratio 0.3s ease" }}
+          className="relative rounded-2xl overflow-hidden border border-[var(--primary)]/5"
+          style={{ aspectRatio, zIndex: 1, transition: "aspect-ratio 0.4s cubic-bezier(0.16, 1, 0.3, 1)" }}
         >
           <AnimatePresence mode="wait" custom={direction}>
             <motion.img
@@ -99,10 +98,10 @@ function GalleryCarousel({
               className="absolute inset-0 w-full h-full object-cover"
               onLoad={(e) => handleLoad(active, e)}
               custom={direction}
-              initial={{ opacity: 0, x: direction * 50, scale: 1.02 }}
-              animate={{ opacity: 1, x: 0, scale: 1 }}
-              exit={{ opacity: 0, x: direction * -50, scale: 0.98 }}
-              transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+              initial={{ opacity: 0, scale: 1.01 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.99 }}
+              transition={{ duration: 0.35, ease: "easeInOut" }}
             />
           </AnimatePresence>
 
@@ -114,14 +113,13 @@ function GalleryCarousel({
             </>
           )}
 
-          {/* Count badge */}
+          {/* Count badge using Urbanist body font */}
           <div
-            className="absolute bottom-3 left-4 z-10 font-(family-name:--font-urbanist) text-xs font-semibold tabular-nums px-2.5 py-1 rounded-full"
+            className="absolute bottom-4 left-4 z-10 font-[family-name:var(--font-body)] text-[10px] font-bold tracking-widest tabular-nums px-3 py-1.5 rounded-md uppercase"
             style={{
-              background: "rgba(255,255,255,0.8)",
+              background: "rgba(255, 255, 255, 0.85)",
               color: "var(--primary)",
-              letterSpacing: "0.12em",
-              backdropFilter: "blur(8px)",
+              backdropFilter: "blur(12px)",
               border: "1px solid rgba(19,27,82,0.08)",
             }}
           >
@@ -131,30 +129,28 @@ function GalleryCarousel({
         </div>
       </div>
 
-      {/* Filmstrip */}
+      {/* Filmstrip elements */}
       {images.length > 1 && (
         <div
-          className="flex gap-3 mt-4 overflow-x-auto pb-1"
+          className="flex gap-2.5 mt-5 overflow-x-auto pb-1"
           style={{ scrollbarWidth: "none" }}
         >
           {images.map((img, i) => (
             <motion.button
               key={i}
               onClick={() => go(i)}
-              whileHover={{ y: -3 }}
-              transition={{ duration: 0.18 }}
-              className="relative shrink-0 rounded-lg overflow-hidden"
+              whileHover={{ y: -2 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              className="relative shrink-0 rounded-lg overflow-hidden bg-[var(--primary)]/5"
               style={{
-                width: 88,
-                height: 56,
+                width: 80,
+                height: 52,
                 border:
                   i === active
-                    ? "2px solid var(--accent)"
-                    : "2px solid rgba(19,27,82,0.12)",
-                boxShadow:
-                  i === active ? "0 0 14px rgba(255,147,99,0.35)" : "none",
-                opacity: i === active ? 1 : 0.5,
-                transition: "all 0.25s ease",
+                    ? "1px solid var(--accent)"
+                    : "1px solid rgba(19,27,82,0.08)",
+                opacity: i === active ? 1 : 0.4,
+                transition: "all 0.3s ease",
               }}
             >
               <img
@@ -181,16 +177,24 @@ function NavButton({
   return (
     <button
       onClick={onClick}
-      className={`absolute ${isPrev ? "left-4" : "right-4"} top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110`}
+      className={`cursor-pointer absolute ${isPrev ? "left-4" : "right-4"} top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300 md:opacity-0 group-hover/carousel:opacity-100 hover:scale-105 active:scale-95`}
       style={{
-        background: "rgba(255,255,255,0.85)",
-        border: "1px solid rgba(19,27,82,0.12)",
+        background: "rgba(255, 255, 255, 0.85)",
+        border: "1px solid rgba(19,27,82,0.08)",
         color: "var(--primary)",
-        fontSize: "1rem",
-        backdropFilter: "blur(8px)",
+        backdropFilter: "blur(12px)",
       }}
+      aria-label={`${direction} image`}
     >
-      {isPrev ? "←" : "→"}
+      {isPrev ? (
+        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+        </svg>
+      ) : (
+        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
+      )}
     </button>
   );
 }

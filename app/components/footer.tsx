@@ -5,7 +5,7 @@ import { FaLinkedin, FaGithub, FaEnvelope, FaPhone } from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <footer className="relative w-full overflow-hidden text-[var(--background)] bg-[var(--dark-green)]">
+    <footer className="relative w-full overflow-hidden text-[var(--background)] bg-[var(--dark-green)] selection:bg-[var(--beige)] selection:text-[var(--primary)]">
       {/* Structural Accent Top Divider Line */}
       <div className="w-full h-1 bg-[var(--primary)]" />
 
@@ -62,7 +62,7 @@ export default function Footer() {
         </div>
 
         {/* Let's Work Together Watermark pushed tighter to bottom */}
-        <div className="absolute -bottom-20 left-0 w-full text-center pointer-events-none z-0">
+        <div className="absolute -bottom-17 left-0 w-full text-center pointer-events-none z-0">
           <h2
             className="text-[9vw] font-black uppercase tracking-wider select-none opacity-[0.03]"
             style={{ color: 'var(--background)', fontFamily: 'var(--font-display)' }}

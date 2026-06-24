@@ -31,6 +31,14 @@ export default function RootLayout({
       className={`${body.variable} ${display.variable} h-full antialiased`}
     >
       <head>
+        <script dangerouslySetInnerHTML={{ __html: `
+          (function() {
+            try {
+              var theme = localStorage.getItem('theme');
+              if (theme === 'dark') document.documentElement.classList.add('dark');
+            } catch(e) {}
+          })();
+        `}} />
         <link
           rel="stylesheet"
           type="text/css"

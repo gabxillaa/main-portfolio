@@ -8,181 +8,60 @@ interface ProjectProcessProps {
 
 export default function ProjectProcess({ process }: ProjectProcessProps) {
   return (
-    <div className="max-w-screen-lg mx-auto px-8 md:px-16 py-14">
-      <Reveal className="mb-10">
+    <div className="max-w-5xl mx-auto px-6 md:px-12 lg:px-16 py-20 bg-[var(--background)]">
+      {/* SECTION HEADER */}
+      <Reveal className="mb-16 md:mb-24">
         <SectionLabel>Process</SectionLabel>
         <h2
-          className="font-(family-name:--font-super-warming) text-2xl md:text-3xl"
+          className="font-[family-name:var(--font-display)] text-3xl md:text-4xl font-normal uppercase tracking-tight"
           style={{ color: "var(--primary)" }}
         >
           How It Came Together
         </h2>
       </Reveal>
 
-      <div className="relative">
-        {/*
-          Two rails — one visible per breakpoint.
-          Mobile: left-aligned at icon centre (19px = half of 38px icon).
-          Desktop: centered at 51% grid split.
-        */}
-        <div
-          className="absolute top-0 bottom-0 md:hidden"
-          style={{ left: 19, width: 1.5, background: "rgba(22,30,84)" }}
-        />
-        <div
-          className="absolute top-0 bottom-0 hidden md:block"
-          style={{ left: "51%", width: 1.5, background: "rgba(22,30,84)" }}
-        />
+      {/* TIMELINE CONTAINER */}
+      <div className="flex flex-col gap-12 md:gap-20">
+        {process.map((step, i) => (
+          <Reveal key={i} delay={i * 0.05}>
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-start group">
 
-        {process.map((step, i) => {
-          const isLeft = i % 2 === 0;
-          return (
-            <Reveal key={i} delay={i * 0.05}>
-              <div className="relative mb-16 last:mb-0 md:mb-3 md:last:mb-0">
+              {/* COL 1: SEQUENTIAL NUMBERING */}
+              <div className="col-span-1 md:col-span-2 pt-1">
+                <span className="font-[family-name:var(--font-body)] text-[11px] font-bold tracking-[0.25em] text-[var(--primary)] uppercase bg-[var(--beige)]/40 px-2.5 py-1 rounded-sm inline-block">
+                  Phase 0{i + 1}
+                </span>
+              </div>
 
-                {/* ── Mobile: left-railed, single-column ── */}
-                <div className="flex items-start md:hidden" style={{ paddingLeft: 0, paddingBottom: 25 }}>
-                  {/* Icon centred on the rail (38px wide, rail at 19px) */}
-                  <div className="relative shrink-0" style={{ width: 38, height: 38 }}>
-                    <div
-                      className="flex items-center justify-center rounded-full"
-                      style={{
-                        width: 38, height: 38,
-                        background: "var(--primary)",
-                        position: "relative", zIndex: 3,
-                      }}
-                    >
-                      <img
-                        src={step.iconUrl}
-                        alt={step.title}
-                        style={{ width: 19, height: 19, objectFit: "contain", filter: "brightness(0) invert(1)" }}
-                      />
-                    </div>
-                  </div>
-
-                  {/* Text block — always left-aligned on mobile */}
-                  <div style={{ paddingLeft: 16 }}>
-                    <p
-                      className="font-(family-name:--font-super-warming) text-xs font-bold tracking-[0.18em] uppercase mb-0.5"
-                      style={{ color: "var(--accent)" }}
-                    >
-                      Step {i + 1}
-                    </p>
-                    <h3
-                      className="font-(family-name:--font-super-warming) text-xl leading-snug mb-1.5"
-                      style={{ color: "var(--primary)" }}
-                    >
-                      {step.title}
-                    </h3>
-                    <p className="font-(family-name:--font-urbanist) text-sm leading-relaxed text-[var(--text)] text-justify">
-                      {step.detail}
-                    </p>
-                  </div>
-                </div>
-
-                {/* ── Desktop: zigzag grid, unchanged ── */}
-                <div
-                  className="hidden md:grid relative"
-                  style={{ gridTemplateColumns: "51% 49%", alignItems: "start" }}
-                >
-                  {/* Centre node */}
-                  <div
-                    className="absolute"
+              {/* COL 2: EDITORIAL GLYPH GRAPHIC */}
+              <div className="col-span-1 md:col-span-2 hidden md:flex justify-start pt-1">
+                <div className="w-11 h-11 rounded-xl bg-[var(--beige)]/20 border border-[var(--beige)] flex items-center justify-center transition-all duration-300 group-hover:bg-[var(--primary)] group-hover:border-[var(--primary)]">
+                  <img
+                    src={step.iconUrl}
+                    alt={step.title}
+                    className="w-5 h-5 object-contain transition-all duration-300 filter brightness-0 invert-0 group-hover:brightness-0 group-hover:invert"
                     style={{
-                      left: "51%", top: 19,
-                      transform: "translateX(-50%)",
-                      width: 7, height: 7, borderRadius: "50%",
-                      background: "#161e54", zIndex: 5,
+                      // Fallback logic colorizes source icon smoothly to forest green before hover invert
+                      color: "var(--primary)"
                     }}
                   />
-
-                  {isLeft ? (
-                    <>
-                      <div className="relative" style={{ paddingLeft: 44, paddingRight: 14 }}>
-                        <StepIcon src={step.iconUrl} alt={step.title} />
-                        <div
-                          className="absolute"
-                          style={{ top: 20, left: 38, right: 0, height: 0, borderTop: "1.5px dashed rgba(22,30,84)", zIndex: 1 }}
-                        />
-                        <StepText index={i} step={step} align="right" />
-                      </div>
-                      <div />
-                    </>
-                  ) : (
-                    <>
-                      <div />
-                      <div className="relative" style={{ paddingLeft: 14, paddingRight: 44 }}>
-                        <StepIcon src={step.iconUrl} alt={step.title} position="right" />
-                        <div
-                          className="absolute"
-                          style={{ top: 19, left: 0, right: 38, height: 0, borderTop: "1.5px dashed rgba(22,30,84)", zIndex: 1 }}
-                        />
-                        <StepText index={i} step={step} align="left" />
-                      </div>
-                    </>
-                  )}
                 </div>
-
               </div>
-            </Reveal>
-          );
-        })}
+
+              {/* COL 3: CORE CONTENT SYSTEM */}
+              <div className="col-span-1 md:col-span-8 md:pl-2 border-l md:border-l-0 border-[var(--dark-green)]/10 pl-4 md:pl-0">
+                <h3 className="font-[family-name:var(--font-display)] text-2xl font-normal text-[var(--dark-green)] uppercase tracking-wide mb-3 leading-tight">
+                  {step.title}
+                </h3>
+                <p className="font-[family-name:var(--font-body)] text-sm md:text-base leading-relaxed text-[var(--dark-green)]/80 font-light antialiased text-left max-w-3xl">
+                  {step.detail}
+                </p>
+              </div>
+
+            </div>
+          </Reveal>
+        ))}
       </div>
-    </div>
-  );
-}
-
-// ── Sub-components ─────────────────────────────────────────────────────────────
-
-function StepIcon({
-  src,
-  alt,
-  position = "left",
-}: {
-  src: string;
-  alt: string;
-  position?: "left" | "right";
-}) {
-  return (
-    <div
-      className={`absolute ${position}-0 top-0 flex items-center justify-center rounded-full`}
-      style={{ width: 38, height: 38, background: "var(--primary)", zIndex: 3 }}
-    >
-      <img
-        src={src}
-        alt={alt}
-        style={{ width: 19, height: 19, objectFit: "contain", filter: "brightness(0) invert(1)" }}
-      />
-    </div>
-  );
-}
-
-function StepText({
-  index,
-  step,
-  align,
-}: {
-  index: number;
-  step: { title: string; detail: string };
-  align: "left" | "right";
-}) {
-  return (
-    <div style={{ textAlign: align, paddingTop: 35, paddingBottom: align === "left" ? 14 : 0 }}>
-      <p
-        className="font-(family-name:--font-super-warming) text-xs font-bold tracking-[0.18em] uppercase mb-0.5"
-        style={{ color: "var(--accent)" }}
-      >
-        Step {index + 1}
-      </p>
-      <h3
-        className="font-(family-name:--font-super-warming) text-2xl leading-snug mb-1.5"
-        style={{ color: "var(--primary)" }}
-      >
-        {step.title}
-      </h3>
-      <p className="font-(family-name:--font-urbanist) text-sm leading-relaxed text-[var(--text)]">
-        {step.detail}
-      </p>
     </div>
   );
 }

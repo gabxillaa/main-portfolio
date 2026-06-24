@@ -9,23 +9,51 @@ export default function EditorialNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
-  const navItems = ["Home", "About", "Projects", "Stack", "Contact"];
-  const sectionIds = ["home", "about-me", "projects", "tech-stack", "contact-me"];
+  const navItems = ["Home", "About", "Projects", "Tech Stack", "Contact"];
+  const sectionIds = ["home", "about", "projects", "tech-stack", "contact-me"];
 
-  useEffect(() => {
-    const isDark = document.documentElement.classList.contains("dark");
-    setIsDarkMode(isDark);
-  }, []);
+ const DARK = {
+  "--background": "#111210",   // warm near-black, slight green undertone
+  "--primary":    "#a8c5a0",   // muted sage — readable, not neon
+  "--beige":      "#1c1e1a",   // dark olive surface for cards/inputs
+  "--dark-green": "#e8e6e0",   // warm off-white for body text
+  "--light-gray": "#7a7d75",   // muted warm gray for secondary text
+} as const;
 
-  const toggleTheme = () => {
-    if (isDarkMode) {
-      document.documentElement.classList.remove("dark");
-      setIsDarkMode(false);
-    } else {
-      document.documentElement.classList.add("dark");
-      setIsDarkMode(true);
-    }
-  };
+const LIGHT = {
+  "--background": "#FBFCEC",
+  "--primary": "#0D530E",
+  "--beige": "#E7E1B1",
+  "--dark-green": "#032804",
+  "--light-gray": "#4D4D4D",
+} as const;
+
+const applyTheme = (vars: Record<string, string>) => {
+  const root = document.documentElement;
+  Object.entries(vars).forEach(([k, v]) => root.style.setProperty(k, v));
+};
+
+// Replace the theme init useEffect
+useEffect(() => {
+  const saved = localStorage.getItem("theme");
+  if (saved === "dark") {
+    applyTheme(DARK);
+    setIsDarkMode(true);
+  }
+}, []);
+
+// Replace toggleTheme
+const toggleTheme = () => {
+  if (isDarkMode) {
+    applyTheme(LIGHT);
+    localStorage.setItem("theme", "light");
+    setIsDarkMode(false);
+  } else {
+    applyTheme(DARK);
+    localStorage.setItem("theme", "dark");
+    setIsDarkMode(true);
+  }
+};
 
   useEffect(() => {
     const handleScroll = () => {
@@ -137,7 +165,7 @@ export default function EditorialNavbar() {
           </ul>
 
           {/* THEME TOGGLE WITH LUCIDE ICONS */}
-          <button
+          {/* <button
             onClick={toggleTheme}
             className="cursor-pointer group relative p-2.5 bg-(--beige)/80 hover:bg-(--beige) text-(--light-gray) hover:text-(--dark-green) transition-all duration-300 focus:outline-none rounded-full overflow-hidden"
             aria-label="Toggle theme"
@@ -155,7 +183,7 @@ export default function EditorialNavbar() {
                 />
               )}
             </div>
-          </button>
+          </button> */}
 
           {/* HAMBURGER */}
           <button

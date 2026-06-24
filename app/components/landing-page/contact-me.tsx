@@ -9,30 +9,28 @@ import CaptchaModal from "./modals/captcha-modal";
 import LoadingOverlay from "@/app/components/ui/loading-overlay";
 import { toast } from "sonner";
 
-// ── Refined Animation Sequences ──────────────────────────────────────────────
+// ── Motion Sequences ─────────────────────────────────────────────────────────
 const fadeUp: Variants = {
   hidden:  { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } },
 };
-const cardReveal: Variants = {
-  hidden:  { opacity: 0, y: 50, scale: 0.98 },
-  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] } },
-};
-const staggerChildren: Variants = {
+
+const staggerContainer: Variants = {
   hidden:  {},
-  visible: { transition: { staggerChildren: 0.08, delayChildren: 0.2 } },
+  visible: { transition: { staggerChildren: 0.05 } },
 };
 
-// Clean, soft inputs utilizing your design tokens perfectly
-const inputClass = "w-full p-4 rounded-2xl bg-[var(--beige)]/30 border border-[var(--beige)]/60 focus:border-[var(--primary)] focus:bg-[var(--beige)]/50 text-[var(--dark-green)] placeholder:text-[var(--dark-green)]/40 focus:outline-none transition-all duration-300 font-[family-name:var(--font-body)] text-base font-light antialiased";
-const errorClass = "text-red-700 font-[family-name:var(--font-body)] text-xs mt-1 pl-1 font-medium";
+// Premium, fully enclosed input blocks with highly accessible tap/click surfaces
+const premiumInputClass = "w-full p-4 rounded-xl bg-[var(--beige)]/10 border border-[var(--dark-green)]/20 focus:border-[var(--primary)] focus:bg-[var(--beige)]/20 text-[var(--dark-green)] placeholder:text-[var(--dark-green)]/30 focus:outline-none transition-all duration-300 font-[family-name:var(--font-body)] text-base font-light antialiased";
+const labelClass = "text-[var(--dark-green)] text-xs font-semibold tracking-[0.15em] uppercase font-[family-name:var(--font-body)] mb-2 block";
+const errorClass = "text-red-700 font-[family-name:var(--font-body)] text-xs mt-1.5 font-medium tracking-wide";
 
 export default function ContactSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView   = useInView(sectionRef, { once: true, margin: "-10% 0px" });
   const [loading, setLoading] = useState(false);
-  const [isCaptchaOpen, setIsCaptchaOpen]   = useState(false);
-  const [captchaToken,  setCaptchaToken]     = useState<string | null>(null);
+  const [isCaptchaOpen, setIsCaptchaOpen] = useState(false);
+  const [captchaToken, setCaptchaToken]   = useState<string | null>(null);
 
   const {
     register,
@@ -88,108 +86,107 @@ export default function ContactSection() {
 
   return (
     <>
+    <LoadingOverlay open={loading} message="Sending your message..." />
       <CaptchaModal
         isOpen={isCaptchaOpen}
         onVerify={handleCaptchaVerify}
         onClose={() => setIsCaptchaOpen(false)}
       />
 
+      {/* Changed target ID back to contact-me to synchronize perfectly with navbar elements */}
       <section
         id="contact-me"
         ref={sectionRef}
-        className="flex items-center justify-center min-h-screen w-full p-4 sm:p-6 md:p-8 bg-[var(--background)]"
+        className="w-full min-h-screen flex flex-col justify-center bg-[var(--background)] text-[var(--dark-green)] py-20 overflow-hidden relative"
       >
-        <motion.div
-          variants={cardReveal}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="relative w-full max-w-5xl p-8 md:p-14 overflow-hidden rounded-[2.5rem] border border-[var(--primary)]/10 bg-[var(--beige)]/10"
-        >
-          <LoadingOverlay open={loading} message="Sending your message..." />
 
-          <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center w-full">
 
-            {/* ── Left Heading Column ── */}
-            <motion.div
-              variants={staggerChildren}
-              initial="hidden"
-              animate={isInView ? "visible" : "hidden"}
-              className="flex flex-col"
-            >
-              <motion.span
-                variants={fadeUp}
-                className="font-[family-name:var(--font-body)] text-xs tracking-[0.25em] uppercase text-[var(--primary)] font-semibold mb-4 block"
-              >
-                Inquiries // Connection
-              </motion.span>
+        {/* ── CENTRAL GRIDS SYSTEM ── */}
+        <div className="w-full max-w-5xl mx-auto px-6 md:px-12 lg:px-16 selection:bg-[var(--primary)] selection:text-[var(--background)]">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+            className="w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start"
+          >
+
+            {/* ── LEFT LAYOUT PANEL: GRAPHIC HEADLINE ── */}
+            <div className="col-span-1 lg:col-span-5 flex flex-col">
+              <motion.div variants={fadeUp} className="flex items-center gap-3 mb-6">
+                <span className="w-6 h-px bg-[var(--primary)]" />
+                <span className="font-[family-name:var(--font-body)] text-xs tracking-[0.25em] uppercase text-[var(--primary)] font-bold">
+                  COMMUNICATION
+                </span>
+              </motion.div>
 
               <motion.h2
                 variants={fadeUp}
-                className="font-[family-name:var(--font-display)] text-5xl md:text-6xl lg:text-7xl mb-6 text-[var(--primary)] tracking-tight leading-[1.1] lowercase"
+                className="font-[family-name:var(--font-display)] text-5xl md:text-6xl lg:text-7xl font-normal tracking-tight uppercase leading-[1.0] text-[var(--dark-green)] mb-6 select-none"
               >
-                Let&apos;s work <br />
-                <span className="text-[var(--dark-green)] opacity-80 italic">together!</span>
+                Let&apos;s build <br />
+                the next <br />
+                <span className="font-[family-name:var(--font-display)] text-[var(--primary)] italic lowercase">interface.</span>
               </motion.h2>
 
-              <motion.p
-                variants={fadeUp}
-                className="font-[family-name:var(--font-body)] text-base md:text-lg text-[var(--light-gray)] max-w-sm leading-relaxed"
-              >
-                Have a question? A project? A fun idea? Please, please, please send it my way :&gt;
-              </motion.p>
-            </motion.div>
+              <motion.div variants={fadeUp} className="font-[family-name:var(--font-body)] text-sm md:text-base leading-relaxed text-[var(--dark-green)] space-y-5 max-w-xl text-left font-light">
+                <p>
+                  Have a system configuration, application idea, or design layout to execute? Drop a detailed message. I monitor this system daily.
+                </p>
+              </motion.div>
+            </div>
 
-            {/* ── Right Form Column ── */}
+            {/* ── RIGHT LAYOUT PANEL: ENCLOSED ACCESSIBLE FORM ── */}
             <motion.form
-              variants={staggerChildren}
-              initial="hidden"
-              animate={isInView ? "visible" : "hidden"}
+              variants={staggerContainer}
               onSubmit={handleSubmit(onSubmit)}
-              className="space-y-5 font-[family-name:var(--font-body)]"
+              className="col-span-1 lg:col-span-7 space-y-6"
             >
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <motion.div variants={fadeUp} className="flex flex-col gap-2">
-                  <label className="text-[var(--primary)] text-xs font-semibold tracking-wider uppercase pl-1">First Name</label>
-                  <input {...register("firstName")} placeholder="First name" type="text" className={inputClass} />
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <motion.div variants={fadeUp}>
+                  <label htmlFor="firstName" className={labelClass}>First Name</label>
+                  <input id="firstName" {...register("firstName")} placeholder="e.g., John" type="text" className={premiumInputClass} />
                   {errors.firstName && <p className={errorClass}>{errors.firstName.message}</p>}
                 </motion.div>
-                <motion.div variants={fadeUp} className="flex flex-col gap-2">
-                  <label className="text-[var(--primary)] text-xs font-semibold tracking-wider uppercase pl-1">Last Name</label>
-                  <input {...register("lastName")} placeholder="Last name" type="text" className={inputClass} />
+
+                <motion.div variants={fadeUp}>
+                  <label htmlFor="lastName" className={labelClass}>Last Name</label>
+                  <input id="lastName" {...register("lastName")} placeholder="e.g., David" type="text" className={premiumInputClass} />
                   {errors.lastName && <p className={errorClass}>{errors.lastName.message}</p>}
                 </motion.div>
               </div>
 
-              <motion.div variants={fadeUp} className="flex flex-col gap-2">
-                <label className="text-[var(--primary)] text-xs font-semibold tracking-wider uppercase pl-1">Email (Required)</label>
-                <input {...register("email")} placeholder="you@example.com" type="email" className={inputClass} />
+              <motion.div variants={fadeUp}>
+                <label htmlFor="email" className={labelClass}>Email Address *</label>
+                <input id="email" {...register("email")} placeholder="name@domain.com" type="email" className={premiumInputClass} />
                 {errors.email && <p className={errorClass}>{errors.email.message}</p>}
               </motion.div>
 
-              <motion.div variants={fadeUp} className="flex flex-col gap-2">
-                <label className="text-[var(--primary)] text-xs font-semibold tracking-wider uppercase pl-1">Description (Required)</label>
+              <motion.div variants={fadeUp}>
+                <label htmlFor="message" className={labelClass}>Description *</label>
                 <textarea
+                  id="message"
                   {...register("message")}
-                  placeholder="Tell me about your project or question..."
+                  placeholder="Outline the scope, requirements, or timeline objectives..."
                   rows={5}
-                  className={`${inputClass} resize-none overflow-y-auto pr-3`}
+                  className={`${premiumInputClass} resize-none overflow-y-auto pr-3`}
                 />
                 {errors.message && <p className={errorClass}>{errors.message.message}</p>}
               </motion.div>
 
+              {/* Submit Action Container */}
               <motion.div variants={fadeUp} className="pt-2">
                 <button
                   type="submit"
                   disabled={isSubmitting || loading}
-                  className="w-full py-4 bg-[var(--primary)] text-[var(--background)] rounded-full font-[family-name:var(--font-body)] text-sm tracking-widest uppercase font-bold transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer hover:bg-[var(--dark-green)]"
+                  className="w-full py-4 bg-[var(--dark-green)] text-[var(--background)] rounded-xl font-[family-name:var(--font-body)] text-xs tracking-[0.2em] uppercase font-bold transform transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer hover:bg-[var(--primary)] active:scale-[0.98] active:bg-[var(--primary)] shadow-sm"
                 >
-                  {loading ? "Sending..." : "Submit Message"}
+                  {loading ? "Sending Message ..." : "Send Message"}
                 </button>
               </motion.div>
             </motion.form>
 
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </section>
     </>
   );

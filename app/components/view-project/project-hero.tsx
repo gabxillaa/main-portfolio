@@ -13,127 +13,87 @@ interface ProjectHeroProps {
 
 export default function ProjectHero({ project }: ProjectHeroProps) {
   const router = useRouter();
-  const ref    = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: false });
 
   return (
     <div
-        ref={ref}
-        className="relative w-full overflow-hidden flex flex-col"
-        style={{
-          background:
-            "radial-gradient(ellipse at 50% 40%, #161e54 0%, #131b52 38%, #10184f 76%)",
-          paddingBottom: "clamp(5rem, 10vw, 7rem)",
-          minHeight: project.liveUrl
-            ? undefined
-            : "clamp(20rem, 60vw, 28rem)",
-        }}
-      >
-      {/* Centre ambient blob */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div
-          style={{
-            width: "55%",
-            height: "65%",
-            background:
-              "radial-gradient(ellipse at center, rgba(40,153,218,0.30) 0%, transparent 70%)",
-            filter: "blur(52px)",
-          }}
-        />
-      </div>
-
-      {/* Ghost title */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
+      ref={ref}
+      className="relative w-full bg-[var(--background)] pt-20 pb-28 md:pb-36 px-6 md:px-12 lg:px-16 selection:bg-[var(--primary)] selection:text-[var(--background)] flex flex-col justify-start overflow-hidden"
+    >
+      {/* ── BACKGROUND TYPOGRAPHY CANVAS (GHOST TEXT) ── */}
+      <div className="absolute inset-x-0 top-0 flex justify-center pointer-events-none select-none overflow-hidden h-3/4">
         <span
-          className="font-(family-name:--font-super-warming) uppercase text-white"
-          style={{
-            fontSize: "clamp(5rem, 18vw, 16rem)",
-            opacity: 0.02,
-            letterSpacing: "0.02em",
-            whiteSpace: "nowrap",
-            lineHeight: 1,
-          }}
+          className="font-[family-name:var(--font-display)] uppercase text-[var(--beige)] tracking-[0.02em] opacity-[0.25] leading-none whitespace-nowrap pt-4"
+          style={{ fontSize: "clamp(8rem, 22vw, 20rem)" }}
         >
           {project.title}
         </span>
       </div>
 
-      {/* Go Back */}
-      <motion.button
-        initial={{ opacity: 0, x: -16 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.45, delay: 0.1 }}
-        onClick={() => router.back()}
-        className="absolute top-5 left-8 z-20 flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold"
-        style={{
-          background: "rgba(255,255,255,0.10)",
-          color: "rgba(255,255,255,0.8)",
-          border: "1px solid rgba(255,255,255,0.18)",
-        }}
-      >
-        ← Go Back
-      </motion.button>
+      {/* ── TOP LAYER BOUNDS CONTROL ── */}
+      <div className="w-full max-w-6xl mx-auto flex items-center justify-between border-b border-[var(--dark-green)]/10 pb-5 mb-16 md:mb-24 relative z-20">
+        <button
+          onClick={() => router.back()}
+          className="font-[family-name:var(--font-body)] text-xs text-[var(--dark-green)]/70 hover:text-[var(--primary)] uppercase tracking-[0.2em] font-bold transition-colors duration-300 bg-transparent border-none outline-none p-0 cursor-pointer"
+        >
+          &larr; Go Back
+        </button>
+        <span className="font-mono text-[10px] text-[var(--dark-green)]/40 tracking-widest uppercase font-medium">
+          Case Portfolio
+        </span>
+      </div>
 
-      {/* Hero text */}
+      {/* ── MAIN ASYMMETRIC MANIFEST STREAM ── */}
       <motion.div
-          variants={stagger}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          className="relative z-10 flex flex-col max-w-screen-lg mx-auto w-full px-8 md:px-16 py-20 "
-          style={{
-            paddingTop: "clamp(4rem, 8vw, 6rem)",
-            paddingBottom: "clamp(1.5rem, 3vw, 2.5rem)",
-            flexGrow: project.liveUrl ? undefined : 1,
-            justifyContent: project.liveUrl ? undefined : "center",
-            minHeight: project.liveUrl ? undefined : 0,
-          }}
-        >
-        <motion.h1
-          variants={fadeUp}
-          className="font-(family-name:--font-super-warming) title leading-tight mb-3 pt-10"
-          style={{ fontSize: "clamp(2rem, 5vw, 4.5rem)", color: "white" }}
-        >
-          About{" "}
-          <span
-            style={{
-              backgroundImage:
-                "linear-gradient(90deg, #FF9363 0%, #FF9363 30%, #60EEE7 46%, #BBE0EF 83%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}
-          >
-            {project.title}
-          </span>
-        </motion.h1>
-
-        <motion.p
-          variants={fadeUp}
-          className="font-(family-name:--font-urbanist) text-sm md:text-lg leading-relaxed mb-6"
-          style={{ color: "rgba(255,255,255)", maxWidth: "650px" }}
-        >
-          {project.tagline}
-        </motion.p>
-
-        {project.liveUrl && (
-          <motion.a
+        variants={stagger}
+        initial="hidden"
+        animate={inView ? "visible" : "hidden"}
+        className="relative z-10 w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start"
+      >
+        {/* LEFT RUNWAY: CRITICAL METADATA DISPLAY */}
+        <div className="col-span-1 lg:col-span-7 flex flex-col items-start">
+          <motion.span
             variants={fadeUp}
-            whileHover={{ scale: 1.03, y: -2 }}
-            whileTap={{ scale: 0.98 }}
-            transition={{ type: "spring", stiffness: 400, damping: 25 }}
-            href={project.liveUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="self-start inline-flex items-center gap-2 px-10 py-3 rounded-full font-(family-name:--font-super-warming) text-base text-white group shadow-lg shadow-[#F54C00]/10 hover:shadow-[#F54C00]/20 transition-shadow duration-300"
-            style={{ background: "linear-gradient(90deg, #FF9363 0%, #F54C00 100%)" }}
+            className="text-[10px] font-[family-name:var(--font-body)] tracking-[0.4em] text-[var(--primary)] font-bold block mb-3 uppercase"
           >
-            <span>View Published</span>
-            <ArrowUpRight className="w-5 h-5 shrink-0 opacity-90 transition-transform duration-200 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </motion.a>
-        )}
+            Project Details
+          </motion.span>
+          <motion.h1
+            variants={fadeUp}
+            className="font-[family-name:var(--font-display)] text-4xl md:text-5xl lg:text-6xl font-normal tracking-tight uppercase text-[var(--dark-green)] leading-[0.95]"
+          >
+            About {project.title}
+          </motion.h1>
+        </div>
+
+        {/* RIGHT RUNWAY: EDITORIAL LOGIC SYNOPSIS */}
+        <div className="col-span-1 lg:col-span-5 flex flex-col items-start lg:pt-6 gap-8">
+          <motion.p
+            variants={fadeUp}
+            className="font-[family-name:var(--font-body)] text-sm md:text-base leading-relaxed text-[var(--dark-green)] font-light antialiased"
+          >
+            {project.tagline}
+          </motion.p>
+
+          {project.liveUrl && (
+            <motion.a
+              variants={fadeUp}
+              whileHover={{ y: -1 }}
+              transition={{ duration: 0.2 }}
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-2.5 px-6 py-3 rounded-full font-[family-name:var(--font-body)] text-xs font-bold tracking-[0.2em] uppercase text-[var(--primary)] bg-transparent border border-[var(--primary)]/20 hover:border-[var(--primary)] hover:bg-[var(--primary)] hover:text-[var(--background)] transition-all duration-300 shadow-sm"
+            >
+              <span>View Published</span>
+              <ArrowUpRight className="w-3.5 h-3.5 shrink-0 opacity-80 transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100" />
+            </motion.a>
+          )}
+        </div>
       </motion.div>
 
-      {/* Curved SVG bottom edge — height scales with viewport width */}
+      {/* ── IMMUTABLE CURVED TIMED SVG CANVAS BASE ── */}
       <div
         className="absolute bottom-0 left-0 right-0 overflow-hidden pointer-events-none"
         style={{ height: "clamp(40px, 6vw, 72px)" }}
