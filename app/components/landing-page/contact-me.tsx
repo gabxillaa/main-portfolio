@@ -95,7 +95,7 @@ export default function ContactSection() {
 
       {/* Changed target ID back to contact-me to synchronize perfectly with navbar elements */}
       <section
-        id="contact-me"
+        id="contact"
         ref={sectionRef}
         className="w-full min-h-screen flex flex-col justify-center bg-[var(--background)] text-[var(--dark-green)] py-20 overflow-hidden relative"
       >
@@ -124,13 +124,13 @@ export default function ContactSection() {
                 className="font-[family-name:var(--font-display)] text-5xl md:text-6xl lg:text-7xl font-normal tracking-tight uppercase leading-[1.0] text-[var(--dark-green)] mb-6 select-none"
               >
                 Let&apos;s build <br />
-                the next <br />
-                <span className="font-[family-name:var(--font-display)] text-[var(--primary)] italic lowercase">interface.</span>
+                something <br />
+                <span className="font-[family-name:var(--font-display)] text-[var(--primary)] italic lowercase">together.</span>
               </motion.h2>
 
               <motion.div variants={fadeUp} className="font-[family-name:var(--font-body)] text-sm md:text-base leading-relaxed text-[var(--dark-green)] space-y-5 max-w-xl text-left font-light">
                 <p>
-                  Have a system configuration, application idea, or design layout to execute? Drop a detailed message. I monitor this system daily.
+                  Have a project in mind or just want to talk about an idea? Send me a message, I check my inbox every day.
                 </p>
               </motion.div>
             </div>

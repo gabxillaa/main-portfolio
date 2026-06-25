@@ -43,7 +43,7 @@ export default function AboutMe() {
         </div>
 
         {/* ── ORGANIC EDITORIAL CONTENT GRID ── */}
-        <div className="w-full max-w-5xl mx-auto px-6 md:px-12 lg:px-16 flex flex-col justify-start pt-4 md:pt-7 lg:pt-10 selection:bg-[var(--dark-green)] selection:text-[var(--background)]">
+        <div className="w-full max-w-5xl mx-auto px-6 md:px-12 lg:px-16 flex flex-col justify-start pt-4 md:pt-7 lg:pt-10 selection:bg-[var(--primary)] selection:text-[var(--background)]">
           <div className="w-full grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 lg:gap-20 items-center">
 
             {/* LEFT COLUMN: NATURAL PORTRAIT */}
@@ -68,16 +68,16 @@ export default function AboutMe() {
               </p>
 
               <h2 className="font-[family-name:var(--font-body)] text-xl md:text-2xl font-medium tracking-tight text-[var(--dark-green)] leading-relaxed mb-6 max-w-xl">
-                I build clean digital spaces where interaction meets{" "}
+                I care about how it looks, and I care about how it's built —{" "}
                 <span className="relative inline-block px-1 z-10 whitespace-nowrap">
                   <span className="absolute inset-x-0 bottom-1 h-3 bg-[var(--beige)] -z-10 transform scale-x-105" />
-                  <span className="font-[family-name:var(--font-display)] font-normal text-[var(--primary)] italic">timeless design.</span>
+                  <span className="font-[family-name:var(--font-display)] font-normal text-[var(--primary)] italic">every detail.</span>
                 </span>
               </h2>
 
               <div className="font-[family-name:var(--font-body)] text-sm md:text-base leading-relaxed text-[var(--dark-green)] space-y-5 max-w-xl text-left font-light">
                 <p>
-                  I'm a frontend developer and UI/UX designer passionate about
+                  I'm Faith Gabrielle Gamboa, a frontend developer and UI/UX designer passionate about
                   building intuitive, user-centered digital experiences. Throughout
                   my academic projects, I've worked on mobile apps, web platforms,
                   desktop systems, and even game development, translating ideas and

@@ -10,7 +10,7 @@ export default function EditorialNavbar() {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   const navItems = ["Home", "About", "Projects", "Tech Stack", "Contact"];
-  const sectionIds = ["home", "about", "projects", "tech-stack", "contact-me"];
+  const sectionIds = ["home", "about", "projects", "tech-stack", "contact"];
 
  const DARK = {
   "--background": "#111210",   // warm near-black, slight green undertone

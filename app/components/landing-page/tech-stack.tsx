@@ -59,7 +59,7 @@ export default function TechStack() {
           </h2>
 
           <p className="font-[family-name:var(--font-body)] text-sm md:text-base leading-relaxed text-[var(--dark-green)] max-w-xl text-left font-light">
-            A high-performance architecture locked into a clean execution layer, prioritizing core rendering engines and framework infrastructures.
+            These are the tools I've picked up along the way, the ones I've actually spent time with, broken things in, and learned to trust.
           </p>
         </div>
 
