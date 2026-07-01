@@ -30,12 +30,12 @@ export default function Footer() {
               I love turning ideas into simple, usable interfaces that people actually enjoy using.
             </p>
             <a
-              href="https://drive.google.com/file/d/YOUR_FILE_ID/view?usp=sharing"
+              href="https://drive.google.com/file/d/16ermPuG4QGXovjfErhQ-Js4iiH1MHsBa/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block px-6 py-2.5 text-[var(--background)] bg-[var(--primary)] hover:bg-[var(--beige)] hover:text-[var(--dark-green)] tracking-wider rounded-full font-[family-name:var(--font-display)] transition-colors duration-300 cursor-pointer"
+              className="inline-block px-6 py-2.5 text-[var(--background)] bg-[var(--primary)] hover:bg-[var(--beige)] hover:text-[var(--dark-green)] text-sm tracking-wider rounded-full font-[family-name:var(--font-body)] transition-colors duration-300 cursor-pointer"
             >
-              View My Resume
+              View Resume
             </a>
           </div>
 
