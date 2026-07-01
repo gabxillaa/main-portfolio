@@ -18,7 +18,7 @@ export default function ArcCarousel() {
   return (
     <section
       id="projects"
-      className="relative w-full min-h-screen bg-[var(--background)] overflow-hidden flex flex-col px-4 sm:px-8 md:px-12 lg:px-16 pt-8 pb-6 sm:pt-10 sm:pb-8 md:py-12 gap-4 sm:gap-6"
+      className="relative w-full lg:min-h-screen bg-[var(--background)] overflow-hidden flex flex-col px-4 sm:px-8 md:px-12 lg:px-16 pt-8 pb-6 sm:pt-10 sm:pb-8 md:py-12 gap-4 sm:gap-6"
     >
       {/* ── ROW 1: Editorial Section Header ── */}
       <div className="w-full max-w-6xl mx-auto flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 sm:gap-6 shrink-0 selection:bg-[var(--primary)] selection:text-[var(--background)]">

@@ -29,11 +29,14 @@ export default function Footer() {
             <p className="max-w-xs text-base text-[var(--background)]/90 font-[family-name:var(--font-body)]">
               I love turning ideas into simple, usable interfaces that people actually enjoy using.
             </p>
-            <button
-              className="px-6 py-2.5 text-[var(--background)] bg-[var(--primary)] hover:bg-[var(--beige)] hover:text-[var(--dark-green)] tracking-wider rounded-full font-[family-name:var(--font-display)] transition-colors duration-300 cursor-pointer"
+            <a
+              href="https://drive.google.com/file/d/YOUR_FILE_ID/view?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block px-6 py-2.5 text-[var(--background)] bg-[var(--primary)] hover:bg-[var(--beige)] hover:text-[var(--dark-green)] tracking-wider rounded-full font-[family-name:var(--font-display)] transition-colors duration-300 cursor-pointer"
             >
-              Download Resume
-            </button>
+              View My Resume
+            </a>
           </div>
 
           {/* Right Side Social Links */}

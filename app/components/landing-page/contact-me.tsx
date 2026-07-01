@@ -97,7 +97,7 @@ export default function ContactSection() {
       <section
         id="contact"
         ref={sectionRef}
-        className="w-full min-h-screen flex flex-col justify-center bg-[var(--background)] text-[var(--dark-green)] py-20 overflow-hidden relative"
+        className="w-full lg:min-h-screen flex flex-col justify-center bg-[var(--background)] text-[var(--dark-green)] py-16 lg:py-20 overflow-hidden relative"
       >
 
 

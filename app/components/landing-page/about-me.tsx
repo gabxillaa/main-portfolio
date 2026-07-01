@@ -19,8 +19,7 @@ export default function AboutMe() {
     <>
       <style dangerouslySetInnerHTML={{ __html: marqueeStyles }} />
 
-      {/* FIXED: Changed from "about-me" to "about" to match your preferred setup */}
-      <section id="about" className="relative w-full min-h-screen flex flex-col bg-[var(--background)] text-[var(--dark-green)] overflow-hidden font-sans">
+      <section id="about" className="relative w-full lg:min-h-screen flex flex-col bg-[var(--background)] text-[var(--dark-green)] overflow-hidden font-sans py-16 lg:py-0">
 
         {/* ── CLEAN MARQUEE BANNER ── */}
         <div className="w-full bg-[var(--dark-green)] text-[var(--background)] py-3 overflow-hidden flex whitespace-nowrap z-30 shrink-0 select-none">
