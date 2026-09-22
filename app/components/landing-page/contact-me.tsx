@@ -5,7 +5,6 @@ import { motion, useInView, type Variants } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { contactSchema, type ContactFormData } from "@/lib/contact-schema";
-import CaptchaModal from "./modals/captcha-modal";
 import LoadingOverlay from "@/app/components/ui/loading-overlay";
 import { toast } from "sonner";
 
@@ -87,11 +86,6 @@ export default function ContactSection() {
   return (
     <>
     <LoadingOverlay open={loading} message="Sending your message..." />
-      <CaptchaModal
-        isOpen={isCaptchaOpen}
-        onVerify={handleCaptchaVerify}
-        onClose={() => setIsCaptchaOpen(false)}
-      />
 
       {/* Changed target ID back to contact-me to synchronize perfectly with navbar elements */}
       <section
