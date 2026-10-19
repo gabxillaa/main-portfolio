@@ -209,7 +209,7 @@ function Deliverables({ images, title }: { images: StepImage[]; title: string })
             <div
               role="tablist"
               aria-label={`${title} deliverable categories`}
-              className="flex gap-3 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              className="flex flex-wrap gap-3"
             >
               {groups.map((g, gi) => {
                 const selected = gi === activeGroup;
