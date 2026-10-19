@@ -1,9 +1,10 @@
 "use client";
 
+import React from "react";
 import { motion } from "framer-motion";
 import { ProjectData } from "@/lib/projects/types";
 import Reveal from "./shared/reveal";
-import { stagger } from "./shared/variants";
+import { fadeUp, stagger } from "./shared/variants";
 import SectionLabel from "./shared/section-labels";
 
 interface ProjectTechStackProps {
@@ -11,71 +12,80 @@ interface ProjectTechStackProps {
 }
 
 export default function ProjectTechStack({ techStack }: ProjectTechStackProps) {
-  return (
-    <div className="max-w-5xl mx-auto px-6 md:px-12 lg:px-16 py-16 bg-[var(--background)]">
-      <Reveal>
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+  if (!techStack || techStack.length === 0) return null;
 
-          {/* LEFT RUNWAY */}
-          <div className="col-span-1 lg:col-span-4 flex flex-col items-start lg:border-r lg:border-[var(--dark-green)]/10 lg:pr-6">
-            <SectionLabel>Tech Stack</SectionLabel>
-            <h2
-              className="font-[family-name:var(--font-display)] text-2xl md:text-3xl font-normal tracking-tight uppercase mt-2 lg:mt-3 leading-none"
-              style={{ color: "var(--primary)" }}
-            >
+  return (
+    <section id="tech-stack" className="relative w-full bg-[var(--background)] pt-8 pb-16 md:pt-12 md:pb-24 px-6 md:px-12 lg:px-20 selection:bg-[var(--primary)] selection:text-[var(--background)]">
+      <div className="max-w-6xl mx-auto flex flex-col gap-12 md:gap-16">
+
+        {/* ── SECTION HEADER ── */}
+        <Reveal>
+          <div className="flex flex-col items-start gap-2 border-b border-[var(--dark-green)]/15 pb-6">
+            <div className="flex items-center gap-3">
+              <span className="font-mono text-xs text-[var(--primary)] font-semibold tracking-wider">
+                06.
+              </span>
+              <SectionLabel>Tech Stack</SectionLabel>
+            </div>
+            <h2 className="font-[family-name:var(--font-display)] text-3xl md:text-5xl font-normal uppercase tracking-tight text-[var(--dark-green)] leading-none mt-1">
               Built With
             </h2>
           </div>
+        </Reveal>
 
-          {/* RIGHT RUNWAY WITH CONTROLS FOR COLOR INTEGRATION */}
-          <motion.div
-            className="col-span-1 lg:col-span-8 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-x-6 gap-y-8 pt-1"
-            variants={stagger}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-6%" }}
-          >
-            {techStack.map((t) => (
-              <div
-                key={t.name}
-                className="flex flex-col items-center text-center gap-3 group"
-              >
-                {/*
-                  Premium tint tile: Uses the brand color directly for background color with an 8% tint overlay.
-                  On hover, the tile softly lifts and increases color density to 15%.
-                */}
+        {/* ── TECH STACK GRID ── */}
+        <Reveal>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
+
+            {/* LEFT RUNWAY */}
+            <div className="col-span-1 lg:col-span-4 flex flex-col gap-3 lg:border-r lg:border-[var(--dark-green)]/15 lg:pr-8">
+              <p className="font-[family-name:var(--font-body)] text-sm md:text-base leading-relaxed text-[var(--light-gray)] font-light antialiased m-0">
+                Core technologies, tools, and frameworks leveraged to build and deploy this system.
+              </p>
+            </div>
+
+            {/* RIGHT RUNWAY: COLORFUL BRAND TILES */}
+            <motion.div
+              className="col-span-1 lg:col-span-8 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-6 lg:pt-1"
+              variants={stagger}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-6%" }}
+            >
+              {techStack.map((t) => (
                 <motion.div
-                  whileHover={{ y: -4 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                  className="w-14 h-14 rounded-xl flex items-center justify-center p-3.5 border border-transparent transition-colors duration-300"
-                  style={{
-                    backgroundColor: `${t.bg}14`, // Appends low hex opacity (approx 8%)
-                    borderColor: `${t.bg}25`     // Appends soft stroke opacity (approx 14%)
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = `${t.bg}26`; // Steps up to ~15% fill on hover
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = `${t.bg}14`;
-                  }}
+                  key={t.name}
+                  variants={fadeUp}
+                  className="flex flex-col items-center text-center gap-3 group cursor-default"
                 >
-                  <img
-                    src={t.icon}
-                    alt={t.name}
-                    className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105"
-                  />
+                  <motion.div
+                    whileHover={{ y: -4 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 28 }}
+                    className="w-16 h-16 rounded-2xl flex items-center justify-center p-3.5 border border-[var(--dark-green)]/15 bg-[var(--background)] transition-all duration-300 hover:border-[var(--primary)]/40 hover:shadow-md"
+                    style={{
+                      // Uses subtle tint matching brand tile dynamic color if provided
+                      backgroundColor: t.bg ? `${t.bg}12` : "transparent",
+                    }}
+                  >
+                    <img
+                      src={t.icon}
+                      alt={t.name}
+                      loading="lazy"
+                      className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110"
+                    />
+                  </motion.div>
+
+                  <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-[var(--dark-green)]/80 transition-colors duration-300 group-hover:text-[var(--primary)]">
+                    {t.name}
+                  </span>
                 </motion.div>
+              ))}
+            </motion.div>
 
-                {/* Meta details tag */}
-                <span className="font-[family-name:var(--font-body)] text-[10px] font-bold uppercase tracking-[0.18em] text-[var(--dark-green)]/50 transition-colors duration-300 group-hover:text-[var(--dark-green)]">
-                  {t.name}
-                </span>
-              </div>
-            ))}
-          </motion.div>
+          </div>
+        </Reveal>
 
-        </div>
-      </Reveal>
-    </div>
+      </div>
+    </section>
   );
 }

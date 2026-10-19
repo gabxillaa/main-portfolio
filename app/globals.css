@@ -9,6 +9,7 @@
 }
 
 body {
+  font-family: urbanist, sans-serif;
   background: var(--background);
   color: var(--dark-green);
   transition: background 0.3s ease, color 0.3s ease;

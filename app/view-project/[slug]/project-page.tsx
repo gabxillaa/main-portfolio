@@ -27,10 +27,10 @@ export default function ProjectPage({ project, nextProject }: ProjectPageProps) 
 
       <ProjectHero project={project} />
       <ProjectSections project={project} />
-      <ProjectProcess process={project.process} />
       <ProjectResults results={project.results} resultDiscussion={project.resultDiscussion} />
-      <ProjectTechStack techStack={project.techStack} />
       <ProjectGallery images={project.gallery} title={project.title} />
+      <ProjectProcess process={project.process} />
+      <ProjectTechStack techStack={project.techStack} />
       <ProjectFooterSections reflection={project.reflection} nextProject={nextProject} />
 
       <Footer />

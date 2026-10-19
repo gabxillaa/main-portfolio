@@ -12,7 +12,6 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!project) return {};
   return {
     title:       `${project.title} — Portfolio`,
-    description: project.tagline,
   };
 }
 
