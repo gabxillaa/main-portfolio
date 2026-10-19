@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { ChevronDown, ChevronLeft, ChevronRight, X, Layers, ZoomIn, ZoomOut } from "lucide-react";
+import { ChevronLeft, ChevronRight, X, ArrowDown, ZoomIn, ZoomOut, Plus } from "lucide-react";
 import { ProjectData } from "@/lib/projects/types";
 import Reveal from "./shared/reveal";
 import SectionLabel from "./shared/section-labels";
@@ -161,15 +161,45 @@ function Deliverables({ images, title }: { images: StepImage[]; title: string })
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className="group inline-flex items-center gap-2 rounded-full border border-[var(--dark-green)]/20 bg-transparent px-4 py-2 font-[family-name:var(--font-body)] text-xs font-semibold uppercase tracking-widest text-[var(--dark-green)] transition-all duration-300 hover:border-[var(--primary)] hover:text-[var(--primary)] hover:bg-[var(--beige)]/20 cursor-pointer"
+        className={`group flex w-full items-center justify-between gap-5 rounded-2xl border p-4 text-left transition-all duration-300 cursor-pointer md:gap-6 md:p-5 ${
+          open
+            ? "border-[var(--primary)]/50 bg-[var(--beige)]/20"
+            : "border-[var(--dark-green)]/20 bg-transparent hover:border-[var(--primary)] hover:bg-[var(--beige)]/15 hover:shadow-[0_4px_24px_-8px_rgba(3,40,4,0.12)]"
+        }`}
       >
-        <Layers className="w-3.5 h-3.5 text-[var(--primary)]" />
-        <span>
-          {open ? "Hide" : "View"} Related Deliverables ({total})
+        <span className="flex min-w-0 items-center gap-5">
+          {/* overlapping previews of the actual deliverables */}
+          <span className="hidden shrink-0 items-center -space-x-5 sm:flex" aria-hidden="true">
+            {images.slice(0, 3).map((img, i) => (
+              <img
+                key={i}
+                src={img.src}
+                alt=""
+                loading="lazy"
+                className="h-16 w-16 rounded-xl border-2 border-[var(--background)] bg-[var(--background)] object-cover object-top shadow-sm transition-transform duration-300 group-hover:translate-x-0.5"
+                style={{ zIndex: 3 - i }}
+              />
+            ))}
+          </span>
+          <span className="flex min-w-0 flex-col gap-1">
+            <span className="font-[family-name:var(--font-display)] text-xl font-normal uppercase tracking-tight leading-none text-[var(--dark-green)] md:text-2xl">
+              {open ? "Hide" : "View"} related deliverables
+            </span>
+            <span className="font-[family-name:var(--font-body)] text-sm text-[var(--light-gray)]">
+              {total} {total === 1 ? "item" : "items"}
+              {groups.length > 1 ? ` across ${groups.length} categories` : ""}
+            </span>
+          </span>
         </span>
-        <ChevronDown
-          className={`h-3.5 w-3.5 transition-transform duration-300 ${open ? "rotate-180" : ""}`}
-        />
+        <span
+          className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full border transition-all duration-300 ${
+            open
+              ? "border-[var(--primary)] bg-[var(--primary)] text-[var(--background)]"
+              : "border-[var(--dark-green)]/25 text-[var(--dark-green)] group-hover:border-[var(--primary)] group-hover:bg-[var(--primary)] group-hover:text-[var(--background)]"
+          }`}
+        >
+          <Plus className={`h-5 w-5 transition-transform duration-300 ${open ? "rotate-45" : ""}`} />
+        </span>
       </button>
 
       {open && (
@@ -179,7 +209,7 @@ function Deliverables({ images, title }: { images: StepImage[]; title: string })
             <div
               role="tablist"
               aria-label={`${title} deliverable categories`}
-              className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              className="flex gap-3 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             >
               {groups.map((g, gi) => {
                 const selected = gi === activeGroup;
@@ -190,7 +220,7 @@ function Deliverables({ images, title }: { images: StepImage[]; title: string })
                     role="tab"
                     aria-selected={selected}
                     onClick={() => switchGroup(gi)}
-                    className={`shrink-0 inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 font-[family-name:var(--font-body)] text-xs font-semibold tracking-wide transition-colors cursor-pointer ${
+                    className={`shrink-0 inline-flex items-center gap-2.5 rounded-full border px-6 py-3 font-[family-name:var(--font-body)] text-sm font-semibold transition-colors cursor-pointer ${
                       selected
                         ? "border-[var(--dark-green)] bg-[var(--dark-green)] text-[var(--background)]"
                         : "border-[var(--dark-green)]/20 text-[var(--dark-green)]/70 hover:border-[var(--primary)] hover:text-[var(--primary)]"
@@ -198,7 +228,7 @@ function Deliverables({ images, title }: { images: StepImage[]; title: string })
                   >
                     {g.label}
                     <span
-                      className={`font-mono text-[10px] ${
+                      className={`font-mono text-xs ${
                         selected ? "text-[var(--background)]/70" : "text-[var(--primary)]"
                       }`}
                     >
@@ -243,25 +273,25 @@ function Deliverables({ images, title }: { images: StepImage[]; title: string })
 
             {items.length > 1 && (
               <div className="mt-3 flex items-center justify-between">
-                <span className="font-mono text-[10px] uppercase tracking-widest text-[var(--light-gray)]">
-                  {items.length} in {group.label}, scroll or use arrows
+                <span className="font-[family-name:var(--font-body)] text-sm text-[var(--light-gray)]">
+                  {items.length} in {group.label}, scroll or use the arrows
                 </span>
                 <div className="flex gap-2">
                   <button
                     type="button"
                     onClick={() => scrollStrip(-1)}
                     aria-label="Scroll left"
-                    className="flex h-8 w-8 items-center justify-center rounded-full border border-[var(--dark-green)]/20 text-[var(--dark-green)] transition-colors hover:border-[var(--primary)] hover:text-[var(--primary)] cursor-pointer"
+                    className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--dark-green)]/25 text-[var(--dark-green)] transition-colors hover:border-[var(--primary)] hover:text-[var(--primary)] cursor-pointer"
                   >
-                    <ChevronLeft className="h-4 w-4" />
+                    <ChevronLeft className="h-5 w-5" />
                   </button>
                   <button
                     type="button"
                     onClick={() => scrollStrip(1)}
                     aria-label="Scroll right"
-                    className="flex h-8 w-8 items-center justify-center rounded-full border border-[var(--dark-green)]/20 text-[var(--dark-green)] transition-colors hover:border-[var(--primary)] hover:text-[var(--primary)] cursor-pointer"
+                    className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--dark-green)]/25 text-[var(--dark-green)] transition-colors hover:border-[var(--primary)] hover:text-[var(--primary)] cursor-pointer"
                   >
-                    <ChevronRight className="h-4 w-4" />
+                    <ChevronRight className="h-5 w-5" />
                   </button>
                 </div>
               </div>
