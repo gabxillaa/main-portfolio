@@ -61,7 +61,6 @@ export const throughTheWoods: ProjectData = {
       title: "Pre-Production",
       takeaway: "The story, six stages, and the full interface were planned before development began.",
       detail: "Most of the planning happened here. We built the story on a Hero's Journey structure, designed four settings (the village, the forest, the cave, and Waga's lair) and five characters, and blueprinted a tutorial plus six stages, each built around one new mechanic. The interface was designed in Figma across low, mid, and high-fidelity prototypes, alongside the screen flow, touch controls, software architecture, and use cases.",
-      // DRAFT: these decisions come from the requirements and documentation. Confirm they match what the team decided.
       insights: [
         {
           finding: "Requirements asked for mechanics to be introduced gradually and explained when they first appear.",
@@ -87,6 +86,15 @@ export const throughTheWoods: ProjectData = {
       title: "Production",
       takeaway: "I built the player's movement, puzzles, and camera in Unity, so each new ability worked the moment the story introduced it.",
       detail: "I integrated the game assets and implemented the player's core systems in Unity: running, jumping, double jump, wall jump, and dashing, then the puzzles and environmental interactions (levers, pressure plates, and pushable objects), camera movement, and basic animations. The other programmer built level progression and the breadcrumb collection requirement to advance, plus checkpoints, the 3-life system, and save and load. We worked in Visual Studio and tracked changes on GitHub.",
+      // DRAFT: group, alt text, and caption are inferred from the filenames. Edit them to describe what each screenshot shows.
+      images: [
+        { group: "Unity implementation", src: "/assets/ttw/unity-1.png", alt: "Through the Woods in the Unity editor, screenshot 1 of 6", caption: "Screenshots from the Unity project, where the player systems, puzzles, and camera were built." },
+        { group: "Unity implementation", src: "/assets/ttw/unity-2.png", alt: "Through the Woods in the Unity editor, screenshot 2 of 6" },
+        { group: "Unity implementation", src: "/assets/ttw/unity-3.png", alt: "Through the Woods in the Unity editor, screenshot 3 of 6" },
+        { group: "Unity implementation", src: "/assets/ttw/unity-4.png", alt: "Through the Woods in the Unity editor, screenshot 4 of 6" },
+        { group: "Unity implementation", src: "/assets/ttw/unity-5.png", alt: "Through the Woods in the Unity editor, screenshot 5 of 6" },
+        { group: "Unity implementation", src: "/assets/ttw/unity-6.png", alt: "Through the Woods in the Unity editor, screenshot 6 of 6" },
+      ],
     },
     {
       id: "testing",

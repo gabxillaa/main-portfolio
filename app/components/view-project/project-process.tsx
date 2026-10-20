@@ -389,7 +389,7 @@ export default function ProjectProcess({ process }: ProjectProcessProps) {
   if (!process || process.length === 0) return null;
 
   return (
-    <section id="process" className="relative w-full bg-[var(--background)] py-20 md:py-28 px-6 md:px-12 lg:px-20 selection:bg-[var(--primary)] selection:text-[var(--background)]">
+    <section id="process" className="relative w-full bg-[var(--background)] py-16 md:py-20 px-6 md:px-12 lg:px-20 selection:bg-[var(--primary)] selection:text-[var(--background)]">
       <div className="max-w-6xl mx-auto flex flex-col gap-16 md:gap-20">
 
         {/* ── SECTION HEADER ── */}

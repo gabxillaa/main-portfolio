@@ -27,7 +27,7 @@ export default function ProjectGallery({ images, title }: ProjectGalleryProps) {
   if (!images || images.length === 0) return null;
 
   return (
-    <section id="gallery" className="relative w-full bg-[var(--background)] pt-8 pb-20 md:pt-12 md:pb-28 px-6 md:px-12 lg:px-20 selection:bg-[var(--primary)] selection:text-[var(--background)]">
+    <section id="gallery" className="relative w-full bg-[var(--background)] py-16 md:py-20 px-6 md:px-12 lg:px-20 selection:bg-[var(--primary)] selection:text-[var(--background)]">
       <div className="max-w-6xl mx-auto flex flex-col gap-12 md:gap-16">
 
         {/* ── SECTION HEADER ── */}

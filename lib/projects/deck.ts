@@ -192,11 +192,11 @@ The lowest scores were still in the Acceptable range, but they point to what to 
     { group: "Moderator platform", src: "/assets/deck/admin-account-details.png", alt: "Deck moderator account details page" },
   ],
 
-  reflection: `Deck started as a second-year project and was revived in third year with a much bigger scope, including a full moderator web platform. The early phase meant realigning the team on direction before development could properly start.
+  reflection: `Deck began as a second-year project and was revived in third year with a much larger scope, including a full moderator web platform. The early phase required realigning the team on direction before development could properly start.
 
-The main difficulty wasn't the technical work, it was the team setup. Uneven availability delayed key outputs like wireframes, so the two of us who were consistently active carried most of the frontend workload alongside our coursework. It taught me to adapt, and working closely with a reliable teammate made a big difference.
+The main challenge was scope. Designing two platforms, a student mobile app and a moderator web platform, took more time than expected, and we took on screens beyond our original plan to keep the project moving. Balancing that against a four-month timeline and my coursework taught me to prioritize, and to keep the interface consistent while the scope kept growing.
 
-The 3.66 UAT score, and the 3.9 for AI-generated decks, showed we had built something useful for the students it was meant for.
+The 3.66 UAT score, and the 3.9 for AI-generated decks, indicated that we had built something useful for the students it was designed for.
 
-If I did it again, I would agree on task ownership and checkpoints at the start so delays surface earlier. For the product, the next steps from our own recommendations are a quiz timer, linking decks to tasks, clearer instructions for identification quizzes, and loading screens that say what the system is doing.`,
+If I were to do it again, I would define the scope and set milestone checkpoints at the start, and allow more time for design, so that schedule risks surface earlier. For the product, the next steps from our own recommendations are a quiz timer, linking decks to tasks, clearer instructions for identification quizzes, and loading screens that explain what the system is doing.`,
 };

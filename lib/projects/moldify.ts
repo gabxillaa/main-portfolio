@@ -77,7 +77,7 @@ export const moldify: ProjectData = {
         },
         {
           finding: "Mycologists said too many fields would slow down their recommendations.",
-          decision: "Split the Input Characteristics screen into five tabs instead of one long form, so each step stays short.",
+          decision: "Included only the fields needed to make a recommendation, and let mycologists add their own recommendation when the pre-built fields were not enough.",
         },
         {
           finding: "Many users were farmers who weren't tech-savvy.",
