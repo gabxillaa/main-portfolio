@@ -36,6 +36,7 @@ export type TechItem = {
 export type GalleryImage = {
   src: string;
   alt: string;
+  group?: string;   // category tab in the gallery, e.g. "Mycologist"
 };
 
 export type ProjectData = {

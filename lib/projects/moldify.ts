@@ -193,11 +193,31 @@ export const moldify: ProjectData = {
     { name: "Miro",        icon: "https://api.iconify.design/simple-icons:miro.svg",       bg: "#fff8d6" },
   ],
 
+  // Gallery is grouped by module; array order = tab order.
+  // DRAFT: group assignments for the new screenshots are inferred from filenames. Move any that are in the wrong module.
   gallery: [
-    { src: "/assets/moldify/Moldify-BG.png", alt: "Moldify web landing page with the welcome banner" },
-    { src: "/assets/moldify/Moldify-LogIn.png", alt: "Moldify web log in screen" },
-    { src: "/assets/moldify/Moldify-FAQ.png", alt: "Moldify web FAQ page" },
-    { src: "/assets/moldify/Moldify-Mobile.png", alt: "Moldify mobile app screens" },
+    { group: "Overview", src: "/assets/moldify/Moldify-Mobile.png", alt: "Moldify mobile app screens" },
+
+    { group: "Client", src: "/assets/moldify/sign-up.png", alt: "Moldify client sign up screen" },
+    { group: "Client", src: "/assets/moldify/submit-report.png", alt: "Moldify client screen for submitting a mold report" },
+    { group: "Client", src: "/assets/moldify/wikimold.png", alt: "Moldify community module, Wikimold mold encyclopedia" },
+
+    { group: "Mycologist", src: "/assets/moldify/mold-scan.png", alt: "Moldify mycologist mold scan screen" },
+    { group: "Mycologist", src: "/assets/moldify/mold-result.png", alt: "Moldify mycologist mold identification result screen" },
+    { group: "Mycologist", src: "/assets/moldify/mold-report.png", alt: "Moldify mycologist investigation report screen" },
+
+    { group: "Administrator", src: "/assets/moldify/Moldify-LogIn.png", alt: "Moldify web log in screen" },
+    { group: "Administrator", src: "/assets/moldify/admin-module-1.png", alt: "Moldify administrator module, screen 1 of 4" },
+    { group: "Administrator", src: "/assets/moldify/admin-module-2.png", alt: "Moldify administrator module, screen 2 of 4" },
+    { group: "Administrator", src: "/assets/moldify/admin-module-3.png", alt: "Moldify administrator module, screen 3 of 4" },
+    { group: "Administrator", src: "/assets/moldify/admin-module-4.png", alt: "Moldify administrator module, screen 4 of 4" },
+    { group: "Administrator", src: "/assets/moldify/case-manage.png", alt: "Moldify administrator case management screen" },
+
+    { group: "Community", src: "/assets/moldify/Moldify-BG.png", alt: "Moldify web landing page with the welcome banner" },
+    { group: "Community", src: "/assets/moldify/community-module-1.png", alt: "Moldify web FAQ page" },
+    { group: "Community", src: "/assets/moldify/community-module-2.png", alt: "Moldify web FAQ page" },
+    { group: "Community", src: "/assets/moldify/Moldify-FAQ.png", alt: "Moldify web FAQ page" },
+
   ],
 
   reflection: `Moldify was my most complete project at that point, with real users, workflows, and constraints. It pushed me to design for very different needs, from farmers submitting reports to administrators managing cases, all within one consistent system. Many of the users were farmers who weren't tech-savvy, which made me realize how important empathy is in UI/UX and forced me to simplify interactions so the system was intuitive, not just functional.

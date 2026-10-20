@@ -173,12 +173,23 @@ The lowest scores were still in the Acceptable range, but they point to what to 
     { name: "Tailwind",    icon: "https://api.iconify.design/logos:tailwindcss-icon.svg", bg: "#ddf1fc" },
   ],
 
+  // Gallery is grouped by platform; array order = tab order.
+  // DRAFT: group assignments and alt text for the new screenshots are inferred from filenames. Fix any that are wrong.
   gallery: [
-    { src: "/assets/deck/Deck-LogIn.png", alt: "Deck log in screen" },
-    { src: "/assets/deck/Deck-Dashboard.png", alt: "Deck moderator dashboard" },
-    { src: "/assets/deck/Deck-Modal.png", alt: "Deck modal dialog" },
-    { src: "/assets/deck/Deck-Mobile1.png", alt: "Deck mobile app screens, set one" },
-    { src: "/assets/deck/Deck-Mobile2.png", alt: "Deck mobile app screens, set two" },
+    { group: "Student app", src: "/assets/deck/account-login-signup.png", alt: "Deck student app log in and sign up screens" },
+    { group: "Student app", src: "/assets/deck/home-screen.png", alt: "Deck student app home screen" },
+    { group: "Student app", src: "/assets/deck/main-task.png", alt: "Deck student app task manager" },
+    { group: "Student app", src: "/assets/deck/maindeck.png", alt: "Deck student app deck library" },
+    { group: "Student app", src: "/assets/deck/study-deck.png", alt: "Deck student app study mode" },
+    { group: "Student app", src: "/assets/deck/deck-results.png", alt: "Deck student app quiz results" },
+
+    { group: "Moderator platform", src: "/assets/deck/Deck-LogIn.png", alt: "Deck log in screen" },
+    { group: "Moderator platform", src: "/assets/deck/Deck-Dashboard.png", alt: "Deck moderator dashboard" },
+    { group: "Moderator platform", src: "/assets/deck/Deck-Modal.png", alt: "Deck modal dialog" },
+    { group: "Moderator platform", src: "/assets/deck/admin-reports.png", alt: "Deck moderator reported content page" },
+    { group: "Moderator platform", src: "/assets/deck/admin-publish-reports.png", alt: "Deck moderator publishing request review page" },
+    { group: "Moderator platform", src: "/assets/deck/admin-account-management.png", alt: "Deck moderator account management page" },
+    { group: "Moderator platform", src: "/assets/deck/admin-account-details.png", alt: "Deck moderator account details page" },
   ],
 
   reflection: `Deck started as a second-year project and was revived in third year with a much bigger scope, including a full moderator web platform. The early phase meant realigning the team on direction before development could properly start.

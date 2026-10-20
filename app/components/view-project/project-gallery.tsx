@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { GalleryImage } from "@/lib/projects/types";
 import Reveal from "./shared/reveal";
@@ -9,6 +9,18 @@ import SectionLabel from "./shared/section-labels";
 interface ProjectGalleryProps {
   images: GalleryImage[];
   title: string;
+}
+
+// Group images by their `group` field, keeping first-appearance order (= tab order).
+function groupImages(images: GalleryImage[]) {
+  const groups: { label: string; items: GalleryImage[] }[] = [];
+  images.forEach((img) => {
+    const label = img.group ?? "Screens";
+    const existing = groups.find((g) => g.label === label);
+    if (existing) existing.items.push(img);
+    else groups.push({ label, items: [img] });
+  });
+  return groups;
 }
 
 export default function ProjectGallery({ images, title }: ProjectGalleryProps) {
@@ -52,33 +64,84 @@ function GalleryCarousel({
   images: GalleryImage[];
   title: string;
 }) {
+  const groups = useMemo(() => groupImages(images), [images]);
+  const [activeGroup, setActiveGroup] = useState(0);
   const [active, setActive] = useState(0);
   const [direction, setDirection] = useState(1);
 
+  // keyed by src so sizes survive switching categories
   const [imageDimensions, setImageDimensions] = useState<
-    Record<number, { w: number; h: number }>
+    Record<string, { w: number; h: number }>
   >({});
+
+  const group = groups[activeGroup] ?? groups[0];
+  const items = group.items;
+  const current = items[active] ?? items[0];
 
   const go = (idx: number) => {
     setDirection(idx > active ? 1 : -1);
     setActive(idx);
   };
-  const prev = () => go((active - 1 + images.length) % images.length);
-  const next = () => go((active + 1) % images.length);
+  const prev = () => go((active - 1 + items.length) % items.length);
+  const next = () => go((active + 1) % items.length);
+
+  const switchGroup = (gi: number) => {
+    if (gi === activeGroup) return;
+    setDirection(gi > activeGroup ? 1 : -1);
+    setActiveGroup(gi);
+    setActive(0);
+  };
 
   const handleLoad = (
-    idx: number,
+    src: string,
     e: React.SyntheticEvent<HTMLImageElement>
   ) => {
     const { naturalWidth: w, naturalHeight: h } = e.currentTarget;
-    setImageDimensions((dims) => ({ ...dims, [idx]: { w, h } }));
+    setImageDimensions((dims) => ({ ...dims, [src]: { w, h } }));
   };
 
-  const dims = imageDimensions[active];
+  const dims = imageDimensions[current.src];
   const aspectRatio = dims ? `${dims.w} / ${dims.h}` : "16 / 9";
 
   return (
     <div className="w-full select-none flex flex-col gap-6">
+
+      {/* CATEGORY TABS */}
+      {groups.length > 1 && (
+        <div
+          role="tablist"
+          aria-label={`${title} gallery categories`}
+          className="flex flex-wrap gap-3"
+        >
+          {groups.map((g, gi) => {
+            const selected = gi === activeGroup;
+            return (
+              <button
+                key={g.label}
+                type="button"
+                role="tab"
+                aria-selected={selected}
+                onClick={() => switchGroup(gi)}
+                className={`inline-flex items-center gap-2.5 rounded-full border px-6 py-3 font-[family-name:var(--font-body)] text-sm font-semibold transition-colors cursor-pointer ${
+                  selected
+                    ? "border-[var(--dark-green)] bg-[var(--dark-green)] text-[var(--background)]"
+                    : "border-[var(--dark-green)]/20 text-[var(--dark-green)]/70 hover:border-[var(--primary)] hover:text-[var(--primary)]"
+                }`}
+              >
+                {g.label}
+                <span
+                  className={`font-mono text-xs ${
+                    selected ? "text-[var(--background)]/70" : "text-[var(--primary)]"
+                  }`}
+                >
+                  {g.items.length}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      )}
+
       <div className="relative group/carousel w-full">
 
         {/* GHOST INDEX BACKGROUND */}
@@ -99,11 +162,11 @@ function GalleryCarousel({
         >
           <AnimatePresence mode="wait" custom={direction}>
             <motion.img
-              key={active}
-              src={images[active].src}
-              alt={images[active].alt || `${title} preview ${active + 1}`}
+              key={current.src}
+              src={current.src}
+              alt={current.alt || `${title} ${group.label} ${active + 1}`}
               className="absolute inset-0 w-full h-full object-cover"
-              onLoad={(e) => handleLoad(active, e)}
+              onLoad={(e) => handleLoad(current.src, e)}
               custom={direction}
               initial={{ opacity: 0, scale: 1.01 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -113,32 +176,33 @@ function GalleryCarousel({
           </AnimatePresence>
 
           {/* NAV ARROWS */}
-          {images.length > 1 && (
+          {items.length > 1 && (
             <>
               <NavButton direction="prev" onClick={prev} />
               <NavButton direction="next" onClick={next} />
             </>
           )}
 
-          {/* COUNT BADGE */}
+          {/* CATEGORY + COUNT BADGE */}
           <div
             className="absolute bottom-4 left-4 z-10 font-mono text-[11px] font-bold tracking-widest tabular-nums px-3.5 py-1.5 rounded-full uppercase bg-[var(--background)]/90 text-[var(--dark-green)] backdrop-blur-md border border-[var(--dark-green)]/15 shadow-2xs"
           >
+            {groups.length > 1 && `${group.label} · `}
             {String(active + 1).padStart(2, "0")} /{" "}
-            {String(images.length).padStart(2, "0")}
+            {String(items.length).padStart(2, "0")}
           </div>
         </div>
       </div>
 
-      {/* FILMSTRIP THUMBNAILS */}
-      {images.length > 1 && (
+      {/* FILMSTRIP THUMBNAILS (current category only) */}
+      {items.length > 1 && (
         <div
           className="flex gap-3 overflow-x-auto pb-2 pt-1"
           style={{ scrollbarWidth: "none" }}
         >
-          {images.map((img, i) => (
+          {items.map((img, i) => (
             <motion.button
-              key={i}
+              key={img.src}
               type="button"
               onClick={() => go(i)}
               whileHover={{ y: -2 }}
