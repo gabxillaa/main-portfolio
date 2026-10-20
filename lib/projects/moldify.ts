@@ -200,18 +200,18 @@ export const moldify: ProjectData = {
 
     { group: "Client", src: "/assets/moldify/sign-up.png", alt: "Moldify client sign up screen" },
     { group: "Client", src: "/assets/moldify/submit-report.png", alt: "Moldify client screen for submitting a mold report" },
+    { group: "Client", src: "/assets/moldify/mold-report.png", alt: "Moldify mycologist investigation report screen" },
     { group: "Client", src: "/assets/moldify/wikimold.png", alt: "Moldify community module, Wikimold mold encyclopedia" },
 
     { group: "Mycologist", src: "/assets/moldify/mold-scan.png", alt: "Moldify mycologist mold scan screen" },
     { group: "Mycologist", src: "/assets/moldify/mold-result.png", alt: "Moldify mycologist mold identification result screen" },
-    { group: "Mycologist", src: "/assets/moldify/mold-report.png", alt: "Moldify mycologist investigation report screen" },
+    { group: "Mycologist", src: "/assets/moldify/case-manage.png", alt: "Moldify mycologist case management screen" },
 
     { group: "Administrator", src: "/assets/moldify/Moldify-LogIn.png", alt: "Moldify web log in screen" },
     { group: "Administrator", src: "/assets/moldify/admin-module-1.png", alt: "Moldify administrator module, screen 1 of 4" },
     { group: "Administrator", src: "/assets/moldify/admin-module-2.png", alt: "Moldify administrator module, screen 2 of 4" },
     { group: "Administrator", src: "/assets/moldify/admin-module-3.png", alt: "Moldify administrator module, screen 3 of 4" },
     { group: "Administrator", src: "/assets/moldify/admin-module-4.png", alt: "Moldify administrator module, screen 4 of 4" },
-    { group: "Administrator", src: "/assets/moldify/case-manage.png", alt: "Moldify administrator case management screen" },
 
     { group: "Community", src: "/assets/moldify/Moldify-BG.png", alt: "Moldify web landing page with the welcome banner" },
     { group: "Community", src: "/assets/moldify/community-module-1.png", alt: "Moldify web FAQ page" },
