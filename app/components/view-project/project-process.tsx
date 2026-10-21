@@ -397,7 +397,7 @@ export default function ProjectProcess({ process }: ProjectProcessProps) {
           <div className="flex flex-col items-start gap-2 border-b border-[var(--dark-green)]/15 pb-8">
             <div className="flex items-center gap-3">
               <span className="font-mono text-xs text-[var(--primary)] font-semibold tracking-wider">
-                05.
+                06.
               </span>
               <SectionLabel>Process</SectionLabel>
             </div>
