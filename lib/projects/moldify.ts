@@ -183,14 +183,14 @@ export const moldify: ProjectData = {
 
   On the other hand, 100 non-IT users gave an average SUS score of 58.98, labeled as "Fair." This wasn’t really about the interface design itself, but more about slow response times (5 to 10 seconds due to the AWS Lambda bottleneck) and some bugs during testing.`,
 
-  techStack: [
-    { name: "TypeScript",  icon: "https://api.iconify.design/logos:typescript-icon.svg",  bg: "#deeaf7" },
-    { name: "Next.js",     icon: "https://api.iconify.design/logos:nextjs-icon.svg",       bg: "#e4e4e6" },
-    { name: "Tailwind",    icon: "https://api.iconify.design/logos:tailwindcss-icon.svg",  bg: "#ddf1fc" },
-    { name: "Flutter",     icon: "https://api.iconify.design/logos:flutter.svg",           bg: "#d9edf8" },
-    { name: "Vercel",      icon: "https://api.iconify.design/logos:vercel-icon.svg",       bg: "#e4e4e6" },
-    { name: "Figma",       icon: "https://api.iconify.design/logos:figma.svg",             bg: "#fde8e2" },
-    { name: "Miro",        icon: "https://api.iconify.design/simple-icons:miro.svg",       bg: "#fff8d6" },
+    techStack: [
+    { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/gilbarbara/logos@main/logos/typescript-icon.svg", bg: "#deeaf7" },
+    { name: "Next.js",    icon: "https://cdn.jsdelivr.net/gh/gilbarbara/logos@main/logos/nextjs-icon.svg",     bg: "#e4e4e6" },
+    { name: "Tailwind",   icon: "https://cdn.jsdelivr.net/gh/gilbarbara/logos@main/logos/tailwindcss-icon.svg", bg: "#ddf1fc" },
+    { name: "Flutter",    icon: "https://cdn.jsdelivr.net/gh/gilbarbara/logos@main/logos/flutter-icon.svg",     bg: "#d9edf8" },
+    { name: "Vercel",     icon: "https://cdn.jsdelivr.net/gh/gilbarbara/logos@main/logos/vercel-icon.svg",      bg: "#e4e4e6" },
+    { name: "Figma",      icon: "https://cdn.jsdelivr.net/gh/gilbarbara/logos@main/logos/figma.svg",            bg: "#fde8e2" },
+    { name: "Miro",       icon: "https://cdn.jsdelivr.net/gh/gilbarbara/logos@main/logos/miro-icon.svg",        bg: "#fff8d6" },
   ],
 
   // Gallery is grouped by module; array order = tab order.

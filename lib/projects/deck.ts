@@ -170,7 +170,7 @@ The lowest scores were still in the Acceptable range, but they point to what to 
     { name: "Figma",       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg", bg: "#FDE2E2" },
     { name: "Flutter",     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg", bg: "#D6EFF7" },
     { name: "CodeIgniter", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/codeigniter/codeigniter-plain.svg", bg: "#FDE6D8" },
-    { name: "Tailwind",    icon: "https://api.iconify.design/logos:tailwindcss-icon.svg", bg: "#ddf1fc" },
+    { name: "Tailwind",   icon: "https://cdn.jsdelivr.net/gh/gilbarbara/logos@main/logos/tailwindcss-icon.svg", bg: "#ddf1fc" },
   ],
 
   // Gallery is grouped by platform; array order = tab order.
