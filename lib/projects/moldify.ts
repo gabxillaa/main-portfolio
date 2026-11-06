@@ -8,6 +8,12 @@ export const moldify: ProjectData = {
   thumbnail: "/assets/moldify/moldify.svg",
   liveUrl:   "https://moldify.vercel.app",
 
+  highlights: {
+    context: "BPI tracked mold cases in Viber messages and handwritten notes, with no central record.",
+    solution: "One cross-platform system where farmers report, mycologists investigate, and admins assign cases.",
+    result: "All 41 functional tests passed, and 30 IT professionals rated it “Excellent.”",
+  },
+
   impactSummary: "A case management system that replaced Viber messages and handwritten notes for BPI's mold investigations.",
   overview: {
     role: "UI/UX Designer & Front-End Developer",

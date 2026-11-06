@@ -3,9 +3,15 @@ import { ProjectData } from "./types";
 export const deck: ProjectData = {
   slug:      "deck",
   title:     "Deck",
-  desc:      "Deck Management System",
+  desc:      "AI-Flashcards and Task Management ",
   gradient:  "linear-gradient(160deg,#71B5C2 0%,#3a8fa0 100%)",
   thumbnail: "/assets/deck.svg",
+
+  highlights: {
+    context: "Medical students were losing time to hand-made flashcards while juggling deadlines and study schedules.",
+    solution: "A mobile app that generates flashcards with AI and organizes tasks, plus a moderator web platform.",
+    result: "3.66 out of 4 in user acceptance testing, with AI-generated decks rated 3.9.",
+  },
 
   impactSummary: "No more making flashcards by hand. Deck generates them with AI and keeps students on top of their tasks and deadlines.",
   overview: {
@@ -174,7 +180,6 @@ The lowest scores were still in the Acceptable range, but they point to what to 
   ],
 
   // Gallery is grouped by platform; array order = tab order.
-  // DRAFT: group assignments and alt text for the new screenshots are inferred from filenames. Fix any that are wrong.
   gallery: [
     { group: "Student app", src: "/assets/deck/account-login-signup.png", alt: "Deck student app log in and sign up screens" },
     { group: "Student app", src: "/assets/deck/home-screen.png", alt: "Deck student app home screen" },

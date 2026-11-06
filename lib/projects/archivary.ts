@@ -3,10 +3,15 @@ import { ProjectData } from "./types";
 export const archivary: ProjectData = {
   slug:      "archivary",
   title:     "Archivary",
-  desc:      "Archival Management System",
+  desc:      "Library Management System",
   gradient:  "linear-gradient(160deg,#71B5C2 0%,#3a8fa0 100%)",
   thumbnail: "/assets/archivary.svg",
 
+  highlights: {
+    context: "School libraries still track books and borrowing in logbooks and spreadsheets, which slows everyday tasks.",
+    solution: "A desktop system for books, borrowing, users, and reports, with a custom-built modern interface.",
+    result: "100% pass rate in functional testing across every module.",
+  },
   impactSummary: "A desktop library management system designed to replace logbooks and spreadsheets for tracking books, borrowing, users, and reports.",
   overview: {
     role: "UI/UX Designer & Front-End Developer",

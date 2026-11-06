@@ -40,6 +40,11 @@ export type GalleryImage = {
 };
 
 export type ProjectData = {
+  highlights?: {
+    context: string;
+    solution: string;
+    result: string;
+  };
   slug: string;
   title: string;
   impactSummary?: string;

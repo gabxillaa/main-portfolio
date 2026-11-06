@@ -3,9 +3,15 @@ import { ProjectData } from "./types";
 export const throughTheWoods: ProjectData = {
   slug:      "through-the-woods",
   title:     "Through the Woods",
-  desc:      "Interactive Storytelling Experience",
+  desc:      "Mobile Game Application",
   gradient:  "linear-gradient(160deg,#71B5C2 0%,#3a8fa0 100%)",
   thumbnail: "/assets/through-the-woods.svg",
+
+  highlights: {
+    context: "We wanted a puzzle-platformer where story and platforming grow together, on mid-range Android phones.",
+    solution: "A pixel-art puzzle-platformer where each of six stages teaches one new ability through Eira's story.",
+    result: "93.75 out of 100 in usability testing, with all 62 GUI and 25 functional tests passed.",
+  },
 
   impactSummary: "A story-driven puzzle-platformer for Android where every new ability arrives with the story, so players learn by playing. It scored 93.75 out of 100 in a usability assessment.",
   overview: {
